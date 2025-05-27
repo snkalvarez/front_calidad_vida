@@ -1,9 +1,10 @@
-import { useState } from 'react'
-import './App.css'
 import { HashRouter, Route, Routes } from 'react-router-dom'
-import Sidebar from './components/nav/Sidebar'
+import './App.css'
 import Error404 from './components/Error404'
+import Home from './components/Home/Home'
+import Sidebar from './components/nav/Sidebar'
 import Prueba from './components/Prueba'
+
 
 
 function App() {
@@ -11,7 +12,7 @@ function App() {
   return (
     <HashRouter>
       <Routes>
-        <Route path="/" element={ <Sidebar /> } />
+        <Route path="/" element={ <Sidebar componente={Home}  /> } />
         <Route path="prueba" element={ <Sidebar componente={Prueba} /> } />
         <Route path='*' element={ <Error404 />} />
       </Routes>
