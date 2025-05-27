@@ -12,11 +12,11 @@ export default function Sidebar({ componente: Componente}) {
             ]
         },
         {
-            nombre: 'Configuración',
+            nombre: 'Graficas',
             submenu: [
                 {
-                    nombre: 'Perfil',
-                    ruta: '/perfil'
+                    nombre: 'Prueba',
+                    ruta: '/prueba'
                 },
                 {
                     nombre: 'Seguridad',
@@ -25,11 +25,11 @@ export default function Sidebar({ componente: Componente}) {
             ]
         },
         {
-            nombre: 'Ayuda',
+            nombre: 'Predictor',
             submenu: [
                 {
-                    nombre: 'Documentación',
-                    ruta: '/documentacion'
+                    nombre: 'Predictor',
+                    ruta: '/predictor'
                 },
                 {
                     nombre: 'Soporte',
