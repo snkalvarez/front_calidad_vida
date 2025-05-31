@@ -1,39 +1,4 @@
-
-const InfoMetricas = () => {
-  const datos = [
-    {
-      algoritmo: "RandomForest",
-      mae: 25.9246,
-      rmse: 103.203,
-      entrenamiento: 94.8083,
-      prediccion: 13.2571,
-      peso: 3031.3627,
-    },
-    {
-      algoritmo: "XGBoost",
-      mae: 8111.9491,
-      rmse: 30376.2244,
-      entrenamiento: 5.8786,
-      prediccion: 0.5094,
-      peso: 0.7404,
-    },
-    {
-      algoritmo: "GradientBoosting",
-      mae: 5668.3905,
-      rmse: 29127.9507,
-      entrenamiento: 27.3905,
-      prediccion: 0.3373,
-      peso: 0.3647,
-    },
-    {
-      algoritmo: "MLPRegressor",
-      mae: 5547.2761,
-      rmse: 48315.7149,
-      entrenamiento: 169.2024,
-      prediccion: 0.3206,
-      peso: 0.3006,
-    },
-  ];
+const InfoMetricas = ({data}) => {
 
   return (
     <div className="container mt-5">
@@ -45,26 +10,32 @@ const InfoMetricas = () => {
         
         <div className="card-body p-0">
           <div className="table-responsive">
-            <table className="table table-hover mb-0">
+            <table className="table table-hover mb-0 small">
               <thead className="table-light">
                 <tr className="text-center">
                   <th>Algoritmo</th>
+                  <th>Conjunto</th>
+                  <th>Dumificado</th>
                   <th>MAE</th>
                   <th>RMSE</th>
+                  <th>R2</th>
                   <th>Entrenamiento (s)</th>
                   <th>Predicción (s)</th>
                   <th>Peso (MB)</th>
                 </tr>
               </thead>
               <tbody>
-                {datos.map((fila, index) => (
+                {data && data.map((dato, index) => (
                   <tr key={index} className="text-center align-middle">
-                    <td className="fw-bold">{fila.algoritmo}</td>
-                    <td>{fila.mae.toFixed(2)}</td>
-                    <td>{fila.rmse.toFixed(2)}</td>
-                    <td>{fila.entrenamiento.toFixed(2)}</td>
-                    <td>{fila.prediccion.toFixed(2)}</td>
-                    <td>{fila.peso.toFixed(2)}</td>
+                    <td className="fw-bold">{dato.Algoritmo}</td>
+                    <td>{dato.Conjunto}</td>
+                    <td>{dato.Dumificado}</td>
+                    <td>{dato.MAE}</td>
+                    <td>{dato.RMSE}</td>
+                    <td>{dato.R2}</td>
+                    <td>{dato.Tiempo_Entrenamiento}</td>
+                    <td>{dato.Tiempo_Prediccion}</td>
+                    <td>{dato.Peso_Modelo_MB}</td>
                   </tr>
                 ))}
               </tbody>
