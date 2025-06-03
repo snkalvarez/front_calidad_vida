@@ -21,6 +21,10 @@ export default function Sidebar({ componente: Componente}) {
                 {
                     nombre: 'Factores Parentales y Su incidencia en los Ingresos del Hogar',
                     ruta: '/GrafFactoresParentales'
+                },
+                {
+                    nombre: 'Satisfacción, Edad y Género vs Ingreso Laboral',
+                    ruta: '/GrafIngresoEdadGenero'
                 }
             ]
         },
