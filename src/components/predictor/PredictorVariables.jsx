@@ -1,220 +1,354 @@
-import { useState } from 'react';
+import { useState } from "react";
+
 const datasetInfo = [
   {
-    atributo: "Madre_vive_hogar",
+    atributo: "mother_lives_household",
     tipo: "Categorica Nominal",
     descripcion: "¿La madre vive en este hogar?",
-    opciones: ["Sí", "No", "Fallecida"]
+    opciones: { Sí: "Si", No: "No", Fallecida: "Fallecida" },
   },
   {
-    atributo: "Padre_vive_hogar",
+    atributo: "father_lives_household",
     tipo: "Categorica Nominal",
     descripcion: "¿El padre vive en este hogar?",
-    opciones: ["Sí", "No", "Fallecido"]
+    opciones: { Sí: "Si", No: "No", Fallecido: "Fallecido" },
   },
   {
-    atributo: "Afiliado_seguridad_Social",
+    atributo: "health_insurance_affiliation",
     tipo: "Categorica Nominal",
-    descripcion: "¿Está afiliado a alguna entidad de seguridad social en salud?",
-    opciones: ["Sí", "No", "No sabe / No informa"]
+    descripcion:
+      "¿Está afiliado a alguna entidad de seguridad social en salud?",
+    opciones: { Sí: "Si", No: "No", "No sabe / No informa": "NSNC" },
   },
   {
-    atributo: "Sexo",
+    atributo: "gender",
     tipo: "Categorica Nominal Binaria",
     descripcion: "Sexo de la persona",
-    opciones: ["Masculino", "Femenino"]
+    opciones: { Masculino: "Masc", Femenino: "Fem" },
   },
   {
-    atributo: "Tuvo_problema_salud",
+    atributo: "health_issue_last_30_days",
     tipo: "Categorica Nominal",
     descripcion: "¿Tuvo algún problema de salud en los últimos 30 días?",
-    opciones: ["Sí", "No"]
+    opciones: { Sí: "Si", No: "No" },
   },
   {
-    atributo: "Tiene_enf_cronica",
+    atributo: "has_chronic_disease",
     tipo: "Categorica Nominal",
     descripcion: "¿Tiene alguna enfermedad crónica diagnosticada?",
-    opciones: ["Sí", "No"]
+    opciones: { Sí: "Si", No: "No" },
   },
   {
-    atributo: "Seguro_med_estudiantil",
+    atributo: "student_health_insurance",
     tipo: "Categorica Nominal",
     descripcion: "¿Tiene seguro médico estudiantil?",
-    opciones: ["Sí", "No"]
+    opciones: { Sí: "Si", No: "No" },
   },
   {
-    atributo: "Plan_complementario_EPS",
+    atributo: "eps_complementary_health_plan",
     tipo: "Categorica Nominal",
     descripcion: "¿Tiene plan complementario de salud con una EPS?",
-    opciones: ["Sí", "No"]
+    opciones: { Sí: "Si", No: "No" },
+  },
+  // en opciones perminta in input numerico
+  {
+    atributo: "expenditure_unit_monthly_income",
+    tipo: "Numerica Continua",
+    descripcion: "Ingreso mensual del hogar (en unidades de gasto)",
+    opciones: { min: 0, max: 150000000 },
   },
   {
-    atributo: "Otro_serv_medico",
+    atributo: "current_age",
+    tipo: "Numerica Continua",
+    descripcion: "Edad actual de la persona (en años)",
+    opciones: { min: 13, max: 77 },
+  },
+  {
+    atributo: "household_monthly_income",
+    tipo: "Numerica Continua",
+    descripcion: "Ingreso mensual del hogar (en pesos)",
+    opciones: { min: 0, max: 150000000 },
+  },
+  {
+    atributo: "per_capita_income",
+    tipo: "Numerica Continua",
+    descripcion: "Ingreso per cápita del hogar (en pesos)",
+    opciones: { min: 0, max: 150000000 },
+  },
+  {
+    atributo: "household_size",
+    tipo: "Numerica Continua",
+    descripcion: "Tamaño del hogar (número de personas)",
+    opciones: { min: 1, max: 18 },
+  },
+  {
+    atributo: "other_health_services",
     tipo: "Categorica Nominal",
-    descripcion: "¿Cuenta con otros servicios médicos como ambulancia o asistencia domiciliaria?",
-    opciones: ["Sí", "No"]
+    descripcion:
+      "¿Cuenta con otros servicios médicos como ambulancia o asistencia domiciliaria?",
+    opciones: { Sí: "Si", No: "No" },
   },
   {
-    atributo: "Medici_prepagada",
+    atributo: "private_health_insurance",
     tipo: "Categorica Nominal",
     descripcion: "¿Cuenta con medicina prepagada?",
-    opciones: ["Sí", "No"]
+    opciones: { Sí: "Si", No: "No" },
   },
   {
-    atributo: "Tiene_poliza_hosp_cirugia",
+    atributo: "hospitalization_surgery_policy",
     tipo: "Categorica Nominal",
     descripcion: "¿Tiene póliza de hospitalización o cirugía?",
-    opciones: ["Sí", "No"]
+    opciones: { Sí: "Si", No: "No" },
   },
   {
-    atributo: "Nivel_edu_alto_madre",
+    atributo: "mother_education_level",
     tipo: "Categorica Ordinal",
     descripcion: "Nivel educativo más alto alcanzado por la madre",
-    opciones: [
-      "Algunos años de primaria",
-      "Toda la primaria",
-      "Algunos años de secundaria",
-      "Toda la secundaria",
-      "Uno o más años de técnica o tecnológica",
-      "Técnica o tecnológica completa",
-      "Uno o más años de universidad",
-      "Universitaria completa",
-      "Ninguno",
-      "No sabe"
-    ]
+    opciones: {
+      "Algunos años de primaria": "PrimIncomp",
+      "Toda la primaria": "PrimComp",
+      "Algunos años de secundaria": "SecIncomp",
+      "Toda la secundaria": "SecComp",
+      "Uno o más años de técnica o tecnológica": "TecIncomp",
+      "Técnica o tecnológica completa": "TecComp",
+      "Uno o más años de universidad": "UnivIncomp",
+      "Universitaria completa": "UnivComp",
+      Ninguno: "Ninguno",
+      "No sabe": "NSNC",
+    },
   },
   {
-    atributo: "Nivel_edu_alto_padre",
+    atributo: "father_education_level",
     tipo: "Categorica Ordinal",
     descripcion: "Nivel educativo más alto alcanzado por el padre",
-    opciones: [
-      "Algunos años de primaria",
-      "Toda la primaria",
-      "Algunos años de secundaria",
-      "Toda la secundaria",
-      "Uno o más años de técnica o tecnológica",
-      "Técnica o tecnológica completa",
-      "Uno o más años de universidad",
-      "Universitaria completa",
-      "Ninguno",
-      "No sabe"
-    ]
+    opciones: {
+      "Algunos años de primaria": "PrimIncomp",
+      "Toda la primaria": "PrimComp",
+      "Algunos años de secundaria": "SecIncomp",
+      "Toda la secundaria": "SecComp",
+      "Uno o más años de técnica o tecnológica": "TecIncomp",
+      "Técnica o tecnológica completa": "TecComp",
+      "Uno o más años de universidad": "UnivIncomp",
+      "Universitaria completa": "UnivComp",
+      Ninguno: "Ninguno",
+      "No sabe": "NSNC",
+    },
   },
   {
-    atributo: "Estado_salud_es",
+    atributo: "general_health_status",
     tipo: "Categorica Ordinal",
     descripcion: "Estado general de salud",
-    opciones: ["Muy bueno", "Bueno", "Regular", "Malo"]
+    opciones: {
+      "Muy bueno": "MuyBuen",
+      Bueno: "Bueno",
+      Regular: "Regular",
+      Malo: "Malo",
+    },
   },
   {
-    atributo: "Puede_ver_cerca_lejos",
+    atributo: "vision_ability",
     tipo: "Categorica Ordinal",
     descripcion: "¿Puede ver de cerca, lejos o alrededor sin ayuda?",
-    opciones: ["No puede hacerlo", "Sí, con mucha dificultad", "Sí, con alguna dificultad", "Sin dificultad"]
+    opciones: {
+      "No puede hacerlo": "NoPuede",
+      "Sí, con mucha dificultad": "MuchaDif",
+      "Sí, con alguna dificultad": "AlgoDif",
+      "Sin dificultad": "SinDif",
+    },
   },
   {
-    atributo: "Puede_oir",
+    atributo: "hearing_ability",
     tipo: "Categorica Ordinal",
     descripcion: "¿Puede oír la voz o sonidos sin ayuda?",
-    opciones: ["No puede hacerlo", "Sí, con mucha dificultad", "Sí, con alguna dificultad", "Sin dificultad"]
+    opciones: {
+      "No puede hacerlo": "NoPuede",
+      "Sí, con mucha dificultad": "MuchaDif",
+      "Sí, con alguna dificultad": "AlgoDif",
+      "Sin dificultad": "SinDif",
+    },
   },
   {
-    atributo: "Puede_cuidarse_solo",
+    atributo: "self_care_ability",
     tipo: "Categorica Ordinal",
     descripcion: "¿Puede comer, vestirse o bañarse solo sin ayuda?",
-    opciones: ["No puede hacerlo", "Sí, con mucha dificultad", "Sí, con alguna dificultad", "Sin dificultad"]
+    opciones: {
+      "No puede hacerlo": "NoPuede",
+      "Sí, con mucha dificultad": "MuchaDif",
+      "Sí, con alguna dificultad": "AlgoDif",
+      "Sin dificultad": "SinDif",
+    },
   },
   {
-    atributo: "Puede_agarrarmover_obj",
+    atributo: "hand_grip_ability",
     tipo: "Categorica Ordinal",
     descripcion: "¿Puede agarrar o mover objetos con las manos sin ayuda?",
-    opciones: ["No puede hacerlo", "Sí, con mucha dificultad", "Sí, con alguna dificultad", "Sin dificultad"]
+    opciones: {
+      "No puede hacerlo": "NoPuede",
+      "Sí, con mucha dificultad": "MuchaDif",
+      "Sí, con alguna dificultad": "AlgoDif",
+      "Sin dificultad": "SinDif",
+    },
   },
   {
-    atributo: "Entiende_aprende_tom_deci_mismo",
+    atributo: "cognitive_ability",
     tipo: "Categorica Ordinal",
     descripcion: "¿Puede entender, aprender o tomar decisiones solo sin ayuda?",
-    opciones: ["No puede hacerlo", "Sí, con mucha dificultad", "Sí, con alguna dificultad", "Sin dificultad"]
+    opciones: {
+      "No puede hacerlo": "NoPuede",
+      "Sí, con mucha dificultad": "MuchaDif",
+      "Sí, con alguna dificultad": "AlgoDif",
+      "Sin dificultad": "SinDif",
+    },
   },
   {
-    atributo: "Puede_hablar",
+    atributo: "speech_ability",
     tipo: "Categorica Ordinal",
     descripcion: "¿Puede hablar o conversar sin ayuda?",
-    opciones: ["No puede hacerlo", "Sí, con mucha dificultad", "Sí, con alguna dificultad", "Sin dificultad"]
+    opciones: {
+      "No puede hacerlo": "NoPuede",
+      "Sí, con mucha dificultad": "MuchaDif",
+      "Sí, con alguna dificultad": "AlgoDif",
+      "Sin dificultad": "SinDif",
+    },
   },
   {
-    atributo: "Puede_moverse_caminar",
+    atributo: "mobility_ability",
     tipo: "Categorica Ordinal",
     descripcion: "¿Puede moverse, caminar o subir/bajar escaleras sin ayuda?",
-    opciones: ["No puede hacerlo", "Sí, con mucha dificultad", "Sí, con alguna dificultad", "Sin dificultad"]
+    opciones: {
+      "No puede hacerlo": "NoPuede",
+      "Sí, con mucha dificultad": "MuchaDif",
+      "Sí, con alguna dificultad": "AlgoDif",
+      "Sin dificultad": "SinDif",
+    },
   },
   {
-    atributo: "Satisfaccion_vida",
+    atributo: "life_satisfaction_level",
     tipo: "Numerica Discreta",
     descripcion: "Satisfacción con la vida (0 a 10)",
-    opciones: Array.from({ length: 11 }, (_, i) => i.toString())
+    opciones: Array.from({ length: 11 }, (_, i) => i.toString()),
   },
   {
-    atributo: "Nivel_satisfa_trabajo",
+    atributo: "job_satisfaction_level",
     tipo: "Numerica Discreta",
     descripcion: "Satisfacción con el trabajo/actividad (0 a 10)",
-    opciones: Array.from({ length: 11 }, (_, i) => i.toString())
+    opciones: Array.from({ length: 11 }, (_, i) => i.toString()),
   },
   {
-    atributo: "Satis_ingreso",
+    atributo: "income_satisfaction_level",
     tipo: "Numerica Discreta",
     descripcion: "Satisfacción con el ingreso actual (0 a 10)",
-    opciones: Array.from({ length: 11 }, (_, i) => i.toString())
+    opciones: Array.from({ length: 11 }, (_, i) => i.toString()),
   },
   {
-    atributo: "Percepcion_valor_vida",
+    atributo: "life_worthwhileness",
     tipo: "Numerica Discreta",
-    descripcion: "Percepción de que las cosas en la vida valen la pena (0 a 10)",
-    opciones: Array.from({ length: 11 }, (_, i) => i.toString())
-  }
+    descripcion:
+      "Percepción de que las cosas en la vida valen la pena (0 a 10)",
+    opciones: Array.from({ length: 11 }, (_, i) => i.toString()),
+  },
 ];
-const modelos = ["XGBoost", "MLPRegressor", "Random Forest"];
+
+const modelos = ["XGBoost", "MplRegressor", "RandomForest", "GradientBoosting"];
 
 const PredictorVariables = ({ onSubmit }) => {
-   const [formData, setFormData] = useState({});
+  const [formData, setFormData] = useState({});
   const [modeloSeleccionado, setModeloSeleccionado] = useState(modelos[0]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+
+    // Buscar el campo correspondiente en datasetInfo
+    const field = datasetInfo.find((item) => item.atributo === name);
+
+    let parsedValue = value;
+
+    // Si el tipo del campo es numérico, convertir el valor
+    if (field?.tipo.includes("Numerica")) {
+      parsedValue = value === "" ? "" : Number(value);
+    }
+
+    setFormData((prev) => ({
+      ...prev,
+      [name]: parsedValue,
+    }));
   };
 
+  const valor = {
+  "cognitive_ability": "SinDif",
+  "current_age": 25,
+  "eps_complementary_health_plan": "No",
+  "expenditure_unit_monthly_income": 2424166.667,
+  "father_education_level": "SecIncomp",
+  "father_lives_household": "Si",
+  "gender": "Fem",
+  "general_health_status": "MuyBuen",
+  "hand_grip_ability": "SinDif",
+  "has_chronic_disease": "No",
+  "health_insurance_affiliation": "Si",
+  "health_issue_last_30_days": "No",
+  "hearing_ability": "SinDif",
+  "hospitalization_surgery_policy": "No",
+  "household_monthly_income": 2424166.667,
+  "household_size": 4,
+  "income_satisfaction_level": 7,
+  "job_satisfaction_level": 4,
+  "life_satisfaction_level": 3,
+  "life_worthwhileness": 10,
+  "mobility_ability": "SinDif",
+  "mother_education_level": "PrimIncomp",
+  "mother_lives_household": "No",
+  "other_health_services": "No",
+  "per_capita_income": 142083.333,
+  "private_health_insurance": "No",
+  "self_care_ability": "SinDif",
+  "speech_ability": "SinDif",
+  "student_health_insurance": "No",
+  "vision_ability": "SinDif"
+};
+
   const handleSubmit = () => {
-    onSubmit({ ...formData, modelo: modeloSeleccionado });
+    onSubmit({ ...valor }, modeloSeleccionado);  
   };
 
   return (
-    <div className="card" style={{ height: '650px' }}>
-      <div className="card-header bg-primary text-white">
-        Predictor
-      </div>
+    <div className="card" style={{ height: "650px" }}>
+      <div className="card-header bg-primary text-white">Predictor</div>
       <div className="card-body overflow-auto">
-        <p className="text-muted">Ingresa todos los campos para realizar la predicción sobre Ingreso Del Hogar</p>
-
+        <p className="text-muted">Ingresa todos los campos para realizar la predicción sobre Ingreso Del Hogar </p>
         {datasetInfo.map((item, index) => (
           <div className="mb-3" key={index}>
             <label className="form-label">{item.descripcion}</label>
-            <select className="form-select" name={item.atributo} onChange={handleChange}>
-              <option value="">Seleccione una opción</option>
-              {item.opciones?.map((opcion, i) => (
-                <option key={i} value={opcion}>{opcion}</option>
-              ))}
-            </select>
+            {item.opciones?.min !== undefined &&
+            item.opciones?.max !== undefined ? (
+              <input type="number" className="form-control" name={item.atributo} onChange={handleChange} min={item.opciones.min} max={item.opciones.max}
+                placeholder={`Ingrese un valor entre ${item.opciones.min} y ${item.opciones.max}`}
+              />
+            ) : (
+              <select className="form-select" name={item.atributo} onChange={handleChange} >
+                <option value="">Seleccione una opción</option>
+                {item.opciones &&
+                  Object.entries(item.opciones).map(([label, value], i) => (
+                    <option key={i} value={value}>
+                      {label}
+                    </option>
+                  ))}
+              </select>
+            )}
           </div>
         ))}
 
         <div className="d-flex align-items-center gap-2">
-          <select className="form-select" value={modeloSeleccionado} onChange={(e) => setModeloSeleccionado(e.target.value)}>
+          <select className="form-select" value={modeloSeleccionado} onChange={(e) => setModeloSeleccionado(e.target.value)} >
             {modelos.map((modelo, idx) => (
-              <option key={idx} value={modelo}>{modelo}</option>
+              <option key={idx} value={modelo}>
+                {modelo}
+              </option>
             ))}
           </select>
-          <button className="btn btn-success" onClick={handleSubmit}>Enviar</button>
+          <button className="btn btn-success" onClick={handleSubmit}>
+            Enviar
+          </button>
         </div>
       </div>
     </div>

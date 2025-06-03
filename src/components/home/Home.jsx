@@ -9,6 +9,11 @@ export default function Home() {
 
     const {data, loading, error, fetchDataTabla } = useFetchDataTabla();
 
+    // agregar titulo a la pagina
+    useEffect(() => {
+        document.title = "Calidad de Vida - Hogar";
+    }, []);
+
     useEffect( () => {
       if(!data){
         fetchDataTabla();
