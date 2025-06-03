@@ -15,12 +15,16 @@ export default function Sidebar({ componente: Componente}) {
             nombre: 'Graficas',
             submenu: [
                 {
-                    nombre: 'Prueba',
-                    ruta: '/prueba'
+                    nombre: 'Exactitud de modelos',
+                    ruta: '/GraficasComparativas'
                 },
                 {
-                    nombre: 'Seguridad',
-                    ruta: '/seguridad'
+                    nombre: 'Factores Parentales y Su incidencia en los Ingresos del Hogar',
+                    ruta: '/GrafFactoresParentales'
+                },
+                {
+                    nombre: 'Satisfacción, Edad y Género vs Ingreso Laboral',
+                    ruta: '/GrafIngresoEdadGenero'
                 }
             ]
         },
