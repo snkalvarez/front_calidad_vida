@@ -18,7 +18,6 @@ const Predictor = () => {
   }, [data]);
 
   const manejarEnvio = (data) => {
-    console.log("Datos enviados:", data);
     setResultado({
       modelo: data.modelo,
       ingreso: data.prediccion,
