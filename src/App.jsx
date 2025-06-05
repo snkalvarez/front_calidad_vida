@@ -7,10 +7,20 @@ import GrafSatisfaccionIngreso from './components/Graficas/GrafSatisfaccionIngre
 import Home from './components/Home/Home'
 import Sidebar from './components/nav/Sidebar'
 import Predictor from './components/predictor/Predictor'
+import GrafRandomTestPredic from './components/Graficas/GrafRandomTestPredic'
+import { useEffect } from 'react'
 
 
 
 function App() {
+
+  useEffect(() => {
+  fetch('https://three-pumas-stop.loca.lt')
+    .then(res => res.json())
+    .then(data => console.log(data))
+    .catch(err => console.error('Error:', err));
+}, []);
+
 
   return (
     <HashRouter>
@@ -20,7 +30,8 @@ function App() {
         <Route path='GraficasComparativas' element={<Sidebar componente={GraficasPrediccion}/>} />
         <Route path='GrafFactoresParentales' element={<Sidebar componente={GrafFactoresParentales}/>}/>
         <Route path="predictor" element={ <Sidebar componente={Predictor} /> } />
-        <Route  path='GrafIngresoEdadGenero' element={ <Sidebar componente={GrafSatisfaccionIngreso}/> }  />
+        <Route path='GrafIngresoEdadGenero' element={ <Sidebar componente={GrafSatisfaccionIngreso}/> }  />
+        <Route path='realvsprediccionrandomforest' element={ <Sidebar componente={GrafRandomTestPredic} /> } />
         <Route path='*' element={ <Error404 />} />
       </Routes>
     </HashRouter>
