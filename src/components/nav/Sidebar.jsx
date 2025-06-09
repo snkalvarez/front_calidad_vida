@@ -25,6 +25,10 @@ export default function Sidebar({ componente: Componente}) {
                 {
                     nombre: 'Satisfacción, Edad y Género vs Ingreso Laboral',
                     ruta: '/GrafIngresoEdadGenero'
+                },
+                {
+                    nombre: 'Real vs Predicción Random Forest',
+                    ruta: '/realvsprediccionrandomforest'
                 }
             ]
         },

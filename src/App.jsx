@@ -8,19 +8,8 @@ import Home from './components/Home/Home'
 import Sidebar from './components/nav/Sidebar'
 import Predictor from './components/predictor/Predictor'
 import GrafRandomTestPredic from './components/Graficas/GrafRandomTestPredic'
-import { useEffect } from 'react'
-
-
 
 function App() {
-
-  useEffect(() => {
-  fetch('https://three-pumas-stop.loca.lt')
-    .then(res => res.json())
-    .then(data => console.log(data))
-    .catch(err => console.error('Error:', err));
-}, []);
-
 
   return (
     <HashRouter>
