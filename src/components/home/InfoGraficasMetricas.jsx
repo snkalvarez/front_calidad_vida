@@ -4,7 +4,6 @@ import {
 
 const InfoGraficasMetricas = ({datos}) => {
 
-  console.log('datos ', datos);
   // const datos = [
   //   {
   //     Algoritmo: "RandomForest",

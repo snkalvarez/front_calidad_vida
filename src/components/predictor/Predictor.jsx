@@ -12,7 +12,6 @@ const Predictor = () => {
 
   useEffect(() => {
     if (data) {
-      console.log("obtuvimos la respuesta", data);
       manejarEnvio(data);
     }
   }, [data]);

@@ -3,20 +3,19 @@ import { Link } from "react-router-dom";
 export default function Sidebar({ componente: Componente}) {
     const opcionesMenu = [
         {
-            nombre: 'Inicio',
-            submenu: [
-                {
-                    nombre: 'prueba',
-                    ruta: '/prueba'
-                }
-            ]
-        },
-        {
             nombre: 'Graficas',
             submenu: [
                 {
                     nombre: 'Exactitud de modelos',
                     ruta: '/GraficasComparativas'
+                },
+                {
+                    nombre: 'Exactitud de modelos Recharts',
+                    ruta: '/GraficasComparativasRecharts'
+                },
+                {
+                    nombre: 'Exactitud de modelos Plotly',
+                    ruta: '/GraficasComparativasPlotly'
                 },
                 {
                     nombre: 'Factores Parentales y Su incidencia en los Ingresos del Hogar',
@@ -55,6 +54,7 @@ export default function Sidebar({ componente: Componente}) {
                         <Link to="/" className="mb-0 mx-1 sin-estilo">Predictor</Link>
                     </div>
                     <ul className="list-unstyled components">
+                        <li><Link to="/">Inicio</Link></li>
                         {opcionesMenu.map((opcion, index) => (
                             <li key={index}>
                                 <a href={`#${opcion.nombre}Submenu`}data-bs-toggle="collapse" data-toggle="collapse" aria-expanded="false" className="dropdown-toggle">
@@ -77,7 +77,7 @@ export default function Sidebar({ componente: Componente}) {
                         {Componente && <Componente />}
                         <footer className="footer-dinamico">
                             <p className="text-muted text-center">
-                                <small>© 2025 - Todos los derechos reservados Julio ALvarez Cuaces & Juan Carlos Ruales</small>
+                                <small>© 2025 - Todos los derechos reservados Julio Alvarez Cuaces & Juan Carlos Ruales</small>
                             </p>
                         </footer>
                     </div>

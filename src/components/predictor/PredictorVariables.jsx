@@ -249,7 +249,7 @@ const datasetInfo = [
   },
 ];
 
-const modelos = ["XGBoost", "MlpRegressor", "RandomForest", "GradientBoosting"];
+const modelos = ["XGBoostX3", "MlpRegressorX3", "RandomForestX3", "GradientBoostingX3"];
 
 const PredictorVariables = ({ onSubmit }) => {
   const [formData, setFormData] = useState({});

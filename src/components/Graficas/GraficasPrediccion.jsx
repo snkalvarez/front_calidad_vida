@@ -44,7 +44,6 @@ const GraficasPrediccion = () => {
 
   const {data : dataRP, loading, error, fetchRealPredicho } = useFetchRealPredicho();
 
-  console.log("Datos obtenidos:", dataRP);
   const handleChange = (e) => {
     const { value } = e.target;
     fetchRealPredicho(value);
@@ -63,7 +62,7 @@ const GraficasPrediccion = () => {
         </select>
       </div>
       <div className="card-body">
-        <ResponsiveContainer width="100%" height={300}>
+        {/* <ResponsiveContainer width="100%" height={300}>
           <LineChart data={dataRP}>
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis dataKey="id" label={{ value: "ID", position: "insideBottom", offset: -5 }} />
@@ -73,7 +72,7 @@ const GraficasPrediccion = () => {
             <Line type="monotone" dataKey="y_real" stroke="#007bff" name="Valor Real" />
             <Line type="monotone" dataKey="y_predicho" stroke="#28a745" name="Predicción" />
           </LineChart>
-        </ResponsiveContainer>
+        </ResponsiveContainer> */}
       </div>
     </div>
   );
