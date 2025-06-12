@@ -1,28 +1,60 @@
-import { CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
+import { useEffect } from 'react';
+import Loader from '../Loader';
+import Plot from 'react-plotly.js';
+import useFetchPresePadres from '../../hooks/graficas/useFetchPresePadres';
 
-const data = [
-  { situacion: 'Fallecido/a', father: 900000, mother: 990000 },
-  { situacion: 'No vive en el hogar', father: 1750000, mother: 1680000 },
-  { situacion: 'Vive en el Hogar', father: 2900000, mother: 2600000 }
-];
+const GrafPresenciaPadres = () => {
 
-const GrafPresenciaPadres = () => (
-  <div className="mt-3" style={{ width: '100%', height: '300px' }}>
-    <div className="bg-secondary text-white p-2 rounded-top">
-      Presencia de los Padres vs Ingreso Promedio
+  const { data, loading, error, fetchPresenciaPadres } = useFetchPresePadres();
+  
+  useEffect(() => {
+    fetchPresenciaPadres();
+  }, []);
+  
+  if (loading) return <Loader />;
+  if (error) return <div>Error: {error}</div>;
+
+  const trazaPadre = {
+    x: data.padres.map(item => item.household_monthly_income),
+    y: data.padres.map(item => item.father_lives_household),
+    mode: 'lines+markers',
+    name: 'Padre',
+    line: { color: 'blue' },
+    marker: { symbol: 'circle' }
+  };
+  
+  const trazaMadre = {
+    x: data.madres.map(item => item.household_monthly_income),
+    y: data.madres.map(item => item.mother_lives_household),
+    mode: 'lines+markers',
+    name: 'Madre',
+    line: { color: 'red' },
+    marker: { symbol: 'square' }
+  };
+
+  return (
+    <div className="mt-3" style={{ width: '100%', height: '300px' }}>
+      <div className="bg-primary text-white p-2 rounded-top">Presencia de los Padres vs Ingreso</div>
+    <Plot data={[trazaPadre, trazaMadre]}
+      layout={{ title: 'Impacto de la Presencia de Padre/Madre en el Ingreso del Hogar',
+        xaxis: {
+          title: 'Ingreso Promedio del Hogar',
+          tickformat: '.1f',
+          tickprefix: 'M$ '
+        },
+        yaxis: {
+          title: 'Situación',
+          tickvals: data.metadata.y_ticks,
+          ticktext: data.metadata.y_labels
+        },
+        hovermode: 'closest',
+        width: 1000,
+        height: 500
+      }}
+      config={{ responsive: true }}
+    />
     </div>
-    <ResponsiveContainer width="100%" height="100%">
-      <LineChart data={data} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="situacion" />
-        <YAxis tickFormatter={val => `${(val / 1000000).toFixed(1)} M`} />
-        <Tooltip formatter={(val) => `${(val / 1000000).toFixed(2)} M`} />
-        <Legend />
-        <Line type="monotone" dataKey="father" name="Padre" stroke="#0000ff" />
-        <Line type="monotone" dataKey="mother" name="Madre" stroke="#ff0000" strokeDasharray="5 5" />
-      </LineChart>
-    </ResponsiveContainer>
-  </div>
-);
+  )
+}
 
 export default GrafPresenciaPadres;

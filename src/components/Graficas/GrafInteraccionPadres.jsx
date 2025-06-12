@@ -1,13 +1,8 @@
-import { useState } from "react";
-import {
-  CartesianGrid,
-  Legend,
-  Line,
-  LineChart,
-  ResponsiveContainer,
-  Tooltip,
-  XAxis, YAxis
-} from "recharts";
+import { useEffect, useState } from "react";
+import { CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import useFetchEducaPresenPadre from "../../hooks/graficas/useFetchEducaPresenPadre";
+import Loader from "../Loader";
+import Plot from "react-plotly.js";
 
 const dataPadre = [
   { nivel: "Ninguno", enHogar: 1100000, noHogar: 800000, fallecido: 450000 },
@@ -18,7 +13,7 @@ const dataPadre = [
 ];
 
 const dataMadre = [
-   { nivel: "Ninguno", enHogar: 900000, noHogar: 700000, fallecido: 350000 },
+  { nivel: "Ninguno", enHogar: 900000, noHogar: 700000, fallecido: 350000 },
   { nivel: "Primaria", enHogar: 1050000, noHogar: 950000, fallecido: 550000 },
   { nivel: "Secundaria", enHogar: 1600000, noHogar: 1150000, fallecido: 950000 },
   { nivel: "Tecnólogo", enHogar: 3200000, noHogar: 2900000, fallecido: 1400000 },
@@ -27,35 +22,56 @@ const dataMadre = [
 
 const GrafInteraccionPadres = () => {
   const [seleccion, setSeleccion] = useState("padre");
-  const data = seleccion === "padre" ? dataPadre : dataMadre;
+  const datax = seleccion === "padre" ? dataPadre : dataMadre;
+  const { data, loading, error, fetchEducaPresenPadre } = useFetchEducaPresenPadre();
+
+  useEffect(() => {
+    fetchEducaPresenPadre().then(() => console.log("Datos cargados:", data));
+  }, []);
+  
+  if (loading) return <Loader />;
+  if (error) return <div className="alert alert-danger">Error al cargar los data: {error}</div>;
+
+  const trazas = Object.keys(data.series).map((estado) => ({
+    x: data.x_labels,
+    y: data.series[estado],
+    type: "scatter",
+    mode: "lines+markers",
+    name: `Padre: ${estado}`
+  }));
 
   return (
 
     <div className="card shadow mb-4 my-2">
       <div className="card-header bg-info text-white d-flex justify-content-between align-items-center">
         <span>Ingreso según Educación y Presencia en el Hogar</span>
-        <select
-          value={seleccion}
-          onChange={(e) => setSeleccion(e.target.value)}
-          className="form-select form-select-sm w-auto"
-        >
+        <select value={seleccion} onChange={(e) => setSeleccion(e.target.value)} className="form-select form-select-sm w-auto" >
           <option value="padre">Padre</option>
           <option value="madre">Madre</option>
         </select>
       </div>
       <div className="card-body">
-        <ResponsiveContainer width="100%" height={350}>
-          <LineChart data={data} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="nivel" angle={-45} textAnchor="end" height={70} />
-            <YAxis tickFormatter={(val) => `${(val / 1000000).toFixed(1)} M`} />
-            <Tooltip formatter={(val) => `${(val / 1000000).toFixed(2)} M`} />
-            <Legend />
-            <Line type="monotone" dataKey="enHogar" name="Está en el hogar" stroke="#0000ff" />
-            <Line type="monotone" dataKey="noHogar" name="No está en el hogar" stroke="#ffa500" />
-            <Line type="monotone" dataKey="fallecido" name="Fallecido" stroke="#28a745" />
-          </LineChart>
-        </ResponsiveContainer>
+        <Plot data={trazas}
+          layout={{
+            title: "Ingreso del hogar según educación del padre y su presencia en el hogar",
+            xaxis: {
+              title: "Nivel educativo del padre",
+              tickangle: -45
+            },
+            yaxis: {
+              title: "Ingreso mensual promedio del hogar",
+              tickprefix: "$",
+              hoverformat: ",.0f"
+            },
+            width: 1000,
+            height: 500,
+            plot_bgcolor: "#fff",
+            paper_bgcolor: "#fff",
+            margin: { l: 100, r: 50, t: 60, b: 60 },
+            legend: { title: { text: "Estado del padre" } }
+          }}
+          config={{ responsive: true }}
+        />
       </div>
     </div>
   );

@@ -10,7 +10,6 @@ import Predictor from './components/predictor/Predictor'
 import GrafRandomTestPredic from './components/Graficas/GrafRandomTestPredic'
 import GraficasPrediccionRecharts from './components/Graficas/GraficasPrediccionRecharts'
 import GraficasPrediccionPlotly from './components/Graficas/GraficasPrediccionPlotly'
-import Loader from './components/Loader'
 
 function App() {
 
@@ -25,7 +24,6 @@ function App() {
         <Route path="predictor" element={ <Sidebar componente={Predictor} /> } />
         <Route path='GrafIngresoEdadGenero' element={ <Sidebar componente={GrafSatisfaccionIngreso}/> }  />
         <Route path='realvsprediccionrandomforest' element={ <Sidebar componente={GrafRandomTestPredic} /> } />
-        <Route path='loader' element={ <Sidebar componente={Loader} /> } />
         <Route path='*' element={ <Error404 />} />
       </Routes>
     </HashRouter>
