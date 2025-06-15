@@ -22,10 +22,20 @@ export const obtenerGraficoEducacionPadres = async () => {
 
 export const obtenerGraficoEducacionPresenciaPadreVsIngreso = async () => {
     try {
-        const response = await apiClientCalidadVida.get(`/grafica/educacionpresenciapadresvsingreso`);
+        const response = await apiClientCalidadVida.get(`/grafica/educacionpresenciapadrevsingreso`);
         return response.data;
     } catch (error) {
         console.error("Error obteniendo el gráfico de educación y presencia de padres vs ingreso: ", error);
+        throw error;
+    }
+}
+
+export const obtenerGraficoEducacionPresenciaMadreVsIngreso = async () => {
+    try {
+        const response = await apiClientCalidadVida.get(`/grafica/educacionpresenciamadrevsingreso`);
+        return response.data;
+    } catch (error) {
+        console.error("Error obteniendo el gráfico de educación y presencia de madres vs ingreso: ", error);
         throw error;
     }
 }
