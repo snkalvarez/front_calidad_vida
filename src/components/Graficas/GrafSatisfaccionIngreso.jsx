@@ -37,7 +37,7 @@ const GrafSatisfaccionIngreso = () => {
             onChange={(e) => setOpcion(e.target.value)}
           >
             <option value="edadGrupo">
-              Ingreso y Edad por Grupo Etario
+              Ingreso y Edad por Grupo según Satisfacción con el trabajo
             </option>
             <option value="edadPromedio">
               Ingreso y Edad Promedio según Satisfacción

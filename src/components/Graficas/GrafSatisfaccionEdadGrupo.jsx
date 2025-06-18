@@ -1,43 +1,91 @@
-import {
-    CartesianGrid,
-    Legend,
-    Line,
-    LineChart,
-    ResponsiveContainer,
-    Tooltip,
-    XAxis,
-    YAxis
-} from "recharts";
-
-const data = [
-  { nivel: 0, edad1: 25, edad2: 40, edad3: 52, edad4: 62, ingreso1: 850000, ingreso2: 950000, ingreso3: 980000, ingreso4: 1050000 },
-  { nivel: 1, edad1: 25, edad2: 40, edad3: 52, edad4: 62, ingreso1: 880000, ingreso2: 980000, ingreso3: 1000000, ingreso4: 1070000 },
-  { nivel: 2, edad1: 25, edad2: 40, edad3: 52, edad4: 62, ingreso1: 870000, ingreso2: 970000, ingreso3: 1010000, ingreso4: 1100000 },
-  { nivel: 3, edad1: 25, edad2: 40, edad3: 52, edad4: 62, ingreso1: 900000, ingreso2: 1000000, ingreso3: 1020000, ingreso4: 1150000 },
-  { nivel: 4, edad1: 25, edad2: 40, edad3: 52, edad4: 62, ingreso1: 950000, ingreso2: 1050000, ingreso3: 1100000, ingreso4: 1200000 },
-  { nivel: 5, edad1: 25, edad2: 40, edad3: 52, edad4: 62, ingreso1: 1000000, ingreso2: 1100000, ingreso3: 1200000, ingreso4: 1300000 },
-  { nivel: 6, edad1: 25, edad2: 40, edad3: 52, edad4: 62, ingreso1: 1050000, ingreso2: 1150000, ingreso3: 1300000, ingreso4: 1400000 },
-  { nivel: 7, edad1: 25, edad2: 40, edad3: 52, edad4: 62, ingreso1: 1100000, ingreso2: 1250000, ingreso3: 1400000, ingreso4: 1500000 },
-  { nivel: 8, edad1: 25, edad2: 40, edad3: 52, edad4: 62, ingreso1: 1250000, ingreso2: 1400000, ingreso3: 1550000, ingreso4: 1650000 },
-  { nivel: 9, edad1: 25, edad2: 40, edad3: 52, edad4: 62, ingreso1: 1350000, ingreso2: 1500000, ingreso3: 1600000, ingreso4: 1700000 },
-  { nivel: 10, edad1: 25, edad2: 40, edad3: 52, edad4: 62, ingreso1: 1400000, ingreso2: 1600000, ingreso3: 1650000, ingreso4: 1750000 },
-];
+import { useEffect } from "react";
+import Loader from "../Loader";
+import Plot from "react-plotly.js";
+import useFetchIngEdadSegunSatisTrabja from "../../hooks/graficas/useFetchIngrEdadSegunSatisTrabja";
 
 const GrafSatisfaccionEdadGrupo = () => {
+
+  const {data, loading, error, fetchIngEdadSegunSatisTrabja} = useFetchIngEdadSegunSatisTrabja();
+  
+  useEffect(() => {
+    fetchIngEdadSegunSatisTrabja();
+  }, []);
+
+  if (loading) {
+    return <Loader/>;
+  }
+
+  if (error) {
+    return <div>Error al cargar los datos: {error.message}</div>;
+  }
+
+  const { x_labels, income_series, age_series } = data;
+
+  // Colores opcionales por grupo de edad
+  const colors = {
+    "15-29": "blue",
+    "30-44": "orange",
+    "45-59": "green",
+    "60-74": "red"
+  };
+
+  const traces = [];
+
+  // Ingreso mensual - eje Y izquierdo
+  Object.entries(income_series).forEach(([group, values]) => {
+    traces.push({
+      x: x_labels,
+      y: values,
+      name: `Ingreso (${group})`,
+      type: "scatter",
+      mode: "lines+markers",
+      marker: { symbol: "circle" },
+      line: { width: 2, color: colors[group] },
+      yaxis: "y1"
+    });
+  });
+
+  // Edad promedio - eje Y derecho
+  Object.entries(age_series).forEach(([group, values]) => {
+    traces.push({
+      x: x_labels,
+      y: values,
+      name: `Edad (${group})`,
+      type: "scatter",
+      mode: "lines+markers",
+      marker: { symbol: "square" },
+      line: { width: 2, dash: "dash", color: colors[group] },
+      yaxis: "y2"
+    });
+  });
+
   return (
-    <ResponsiveContainer width="100%" height={300}>
-      <LineChart data={data}>
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="nivel" tickFormatter={(v) => `${v}`} />
-        <YAxis yAxisId="left" tickFormatter={(v) => `${(v / 1e6).toFixed(1)} M`} />
-        <Tooltip />
-        <Legend />
-        <Line yAxisId="left" type="monotone" dataKey="ingreso1" stroke="#8884d8" name="Ingreso (15-29)" />
-        <Line yAxisId="left" type="monotone" dataKey="ingreso2" stroke="#82ca9d" name="Ingreso (30-44)" />
-        <Line yAxisId="left" type="monotone" dataKey="ingreso3" stroke="#ffc658" name="Ingreso (45-59)" />
-        <Line yAxisId="left" type="monotone" dataKey="ingreso4" stroke="#ff7300" name="Ingreso (60-74)" />
-      </LineChart>
-    </ResponsiveContainer>
+    <Plot
+      data={traces}
+      layout={{
+        title: "Ingreso y edad según satisfacción con el trabajo",
+        xaxis: {
+          title: "Nivel de satisfacción laboral",
+          tickmode: "linear",
+          dtick: 1
+        },
+        yaxis: {
+          title: "Ingreso mensual promedio",
+          side: "left"
+        },
+        yaxis2: {
+          title: "Edad promedio",
+          overlaying: "y",
+          side: "right"
+        },
+        legend: {
+          title: { text: "Grupo de edad" }
+        },
+        margin: { t: 50, l: 60, r: 60, b: 60 },
+        hovermode: "x unified"
+      }}
+      style={{ width: "100%", height: "500px" }}
+    />
   );
 };
 

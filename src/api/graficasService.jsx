@@ -39,3 +39,34 @@ export const obtenerGraficoEducacionPresenciaMadreVsIngreso = async () => {
         throw error;
     }
 }
+
+export const obtenerGraficoIngresoSatisfaccionTrabajoGenero = async () => {
+    try {
+        const response = await apiClientCalidadVida.get(`/grafica/ingresosatisfacciontrabajogenero`);
+        return response.data;
+    } catch (error) {
+        console.error("Error obteniendo el gráfico de ingreso y satisfacción laboral por género: ", error);
+        throw error;
+    }
+}
+
+
+export const obtenerGraficoIngresoEdadSegunSatisTrabajo = async () => {
+    try {
+        const response = await apiClientCalidadVida.get(`/grafica/ingresoedadsegunsatisfacciontrabajo`);
+        return response.data;
+    } catch (error) {
+        console.error("Error obteniendo el gráfico de ingreso y edad según satisfacción laboral: ", error);
+        throw error;
+    }
+}
+
+export const obtenerGraficoIngresoEdadPromedioSegunSatisTrabajo = async () => {
+    try {
+        const response = await apiClientCalidadVida.get(`/grafica/ingresoedadpromediosegunsatisfacciontrabajo`);
+        return response.data;
+    } catch (error) {
+        console.error("Error obteniendo el gráfico de ingreso y edad promedio según satisfacción laboral: ", error);
+        throw error;
+    }
+}

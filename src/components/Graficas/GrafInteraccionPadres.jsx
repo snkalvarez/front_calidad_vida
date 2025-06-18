@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import useFetchEducaPresenPadre from "../../hooks/graficas/useFetchEducaPresenPadre";
 import Loader from "../Loader";
 import Plot from "react-plotly.js";
@@ -68,8 +67,8 @@ const GrafInteraccionPadres = () => {
         </select>
       </div>
       <div className="card-body">
-        {seleccion != "" && loadingP && <Loader /> }
-        {seleccion != "" && loadingM && <Loader /> }
+        {seleccion == "padre" && loadingP && !trazasP && <Loader /> }
+        {seleccion == "madre" && loadingM && !trazasM && <Loader /> }
         {seleccion == "padre" && trazasP && (
           <Plot data={trazasP}
           layout={{
