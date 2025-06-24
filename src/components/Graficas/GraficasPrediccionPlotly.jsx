@@ -40,22 +40,27 @@ const GraficasPrediccionPlotly = () => {
     }, [dataRP])
 
     return (
-        <>
-            <select className="form-select w-auto" value={modeloSeleccionado} onChange={handleChange}>
-                <option value="">Seleccione un modelo</option>
-                <option value="XGBoostX3">XGBoost</option>
-                <option value="MlpRegressorX3">MLPRegressor</option>
-                <option value="RandomForestX3">RandomForest</option>
-                <option value="GradientBoostingX3">GradientBoosting</option>
-            </select>
-            {
-                loading ? (
-                    <Loader />
-                ) :(
-                    <div id="grafico" style={{ width: "100%", height: "600px" }}></div>
-                )
-            }
-        </>
+        <div className="card mt-4 shadow">
+            <div className="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                <h5 className="mb-0">Comparación: Valores Reales vs Predicción</h5>
+                <select className="form-select w-auto" value={modeloSeleccionado} onChange={handleChange}>
+                    <option value="">Seleccione un modelo</option>
+                    <option value="XGBoostX3">XGBoost</option>
+                    <option value="MlpRegressorX3">MLPRegressor</option>
+                    <option value="RandomForestX3">RandomForest</option>
+                    <option value="GradientBoostingX3">GradientBoosting</option>
+                </select>
+            </div>
+            <div className="card-body">
+                {
+                    loading ? (
+                        <Loader />
+                    ) : (
+                        <div id="grafico" style={{ width: "100%", height: "600px" }}></div>
+                    )
+                }
+            </div>
+        </div>
     );
 };
 

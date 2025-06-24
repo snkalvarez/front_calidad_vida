@@ -2,21 +2,36 @@ import { Link } from "react-router-dom";
 
 export default function Sidebar({ componente: Componente}) {
     const opcionesMenu = [
+        // {
+        //     nombre: 'Pruebas',
+        //     submenu: [
+                                // prueba realizada con recharts
+                // {
+                //     nombre: 'Exactitud de modelos Recharts',
+                //     ruta: '/GraficasComparativasRecharts'
+                // },
+                
+                // prueba realizada con react-plotly
+                // {
+                //     nombre: 'Real vs Predicción Random Forest',
+                //     ruta: '/realvsprediccionrandomforest'
+                // }
+            // ]
+        // },
         {
-            nombre: 'Graficas',
+            id: '1',
+            nombre: 'Graficas Comparativas',
             submenu: [
                 {
-                    nombre: 'Exactitud de modelos',
-                    ruta: '/GraficasComparativas'
-                },
-                {
-                    nombre: 'Exactitud de modelos Recharts',
-                    ruta: '/GraficasComparativasRecharts'
-                },
-                {
-                    nombre: 'Exactitud de modelos Plotly',
+                    nombre: 'Comparativas Real vs Predicción',
                     ruta: '/GraficasComparativasPlotly'
                 },
+            ]
+        },
+        {
+            id: '2',
+            nombre: 'Graficas Exploratorias',
+            submenu: [
                 {
                     nombre: 'Factores Parentales y Su incidencia en los Ingresos del Hogar',
                     ruta: '/GrafFactoresParentales'
@@ -25,13 +40,10 @@ export default function Sidebar({ componente: Componente}) {
                     nombre: 'Satisfacción, Edad y Género vs Ingreso Laboral',
                     ruta: '/GrafIngresoEdadGenero'
                 },
-                {
-                    nombre: 'Real vs Predicción Random Forest',
-                    ruta: '/realvsprediccionrandomforest'
-                }
             ]
         },
         {
+            id: '3',
             nombre: 'Predictor',
             submenu: [
                 {
@@ -57,11 +69,11 @@ export default function Sidebar({ componente: Componente}) {
                         <li><Link to="/">Inicio</Link></li>
                         {opcionesMenu.map((opcion, index) => (
                             <li key={index}>
-                                <a href={`#${opcion.nombre}Submenu`}data-bs-toggle="collapse" data-toggle="collapse" aria-expanded="false" className="dropdown-toggle">
+                                <a href={`#${opcion.id}Submenu`}data-bs-toggle="collapse" data-toggle="collapse" aria-expanded="false" className="dropdown-toggle">
                                     {opcion.nombre}
                                 </a>
                                 <ul
-                                    className="collapse list-unstyled" id={`${opcion.nombre}Submenu`} data-bs-parent="#sidebar ul.components" >
+                                    className="collapse list-unstyled" id={`${opcion.id}Submenu`} data-bs-parent="#sidebar ul.components" >
                                     {opcion.submenu.map((subopcion, subIndex) => (
                                         <li key={subIndex} >
                                             <Link to={subopcion.ruta}>{subopcion.nombre}</Link>
