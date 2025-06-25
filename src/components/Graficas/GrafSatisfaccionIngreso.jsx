@@ -27,24 +27,11 @@ const GrafSatisfaccionIngreso = () => {
       </div>
       <div className="card-body">
         <div className="mb-3">
-          <label htmlFor="selectorGrafica" className="form-label">
-            Selecciona una visualización:
-          </label>
-          <select
-            id="selectorGrafica"
-            className="form-select"
-            value={opcion}
-            onChange={(e) => setOpcion(e.target.value)}
-          >
-            <option value="edadGrupo">
-              Ingreso y Edad por Grupo según Satisfacción con el trabajo
-            </option>
-            <option value="edadPromedio">
-              Ingreso y Edad Promedio según Satisfacción
-            </option>
-            <option value="genero">
-              Ingreso según Género y Satisfacción
-            </option>
+          <label htmlFor="selectorGrafica" className="form-label">Selecciona una visualización:</label>
+          <select id="selectorGrafica" className="form-select" value={opcion} onChange={(e) => setOpcion(e.target.value)}>
+            <option value="edadGrupo">Ingreso y Edad por Grupo según Satisfacción con el trabajo</option>
+            <option value="edadPromedio">Ingreso y Edad Promedio según Satisfacción</option>
+            <option value="genero">Ingreso según Género y Satisfacción</option>
           </select>
         </div>
         {renderGrafica()}
