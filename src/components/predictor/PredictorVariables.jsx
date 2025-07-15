@@ -313,7 +313,7 @@ const PredictorVariables = ({ onSubmit }) => {
 
   return (
     <div className="card" style={{ height: "650px" }}>
-      <div className="card-header bg-primary text-white">Predictor</div>
+      <div className="card-header text-white" style={{ backgroundColor: '#000051' }}>Predictor</div>
       <div className="card-body overflow-auto">
         <p className="text-muted">Ingresa todos los campos para realizar la predicción sobre Ingreso Del Hogar </p>
         {datasetInfo.map((item, index) => (

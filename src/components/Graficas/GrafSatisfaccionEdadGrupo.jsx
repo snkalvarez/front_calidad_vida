@@ -155,12 +155,7 @@ const GrafSatisfaccionEdadGrupo = () => {
     <div className="p-4">
       <div className="mb-4">
         <label htmlFor="tipoGrafico" className="mr-2 font-bold">Tipo de gráfico:</label>
-        <select
-          id="tipoGrafico"
-          value={tipoGrafico}
-          onChange={(e) => setTipoGrafico(e.target.value)}
-          className="border rounded px-2 py-1"
-        >
+        <select id="tipoGrafico" value={tipoGrafico} onChange={(e) => setTipoGrafico(e.target.value)} className="border rounded px-2 py-1" >
           <option value="linea">Línea (Ingreso + Edad)</option>
           <option value="barras">Barras apiladas (Edad)</option>
           <option value="pie">Pie (Grupos de edad)</option>

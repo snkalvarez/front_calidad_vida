@@ -8,18 +8,8 @@ const GrafInteraccionPadres = () => {
   const [seleccion, setSeleccion] = useState("");
   const [tipoGrafico, setTipoGrafico] = useState("línea");
 
-  const {
-    data: dataP,
-    loading: loadingP,
-    error: errorP,
-    fetchEducaPresenPadre
-  } = useFetchEducaPresenPadre();
-  const {
-    data: dataM,
-    loading: loadingM,
-    error: errorM,
-    fetchEducaPresenMadre
-  } = useFetchEducaPresenMadre();
+  const { data: dataP, loading: loadingP, error: errorP, fetchEducaPresenPadre } = useFetchEducaPresenPadre();
+  const { data: dataM, loading: loadingM, error: errorM, fetchEducaPresenMadre } = useFetchEducaPresenMadre();
 
   useEffect(() => {
     if (seleccion === "padre" && !dataP?.series) {
@@ -155,24 +145,16 @@ const GrafInteraccionPadres = () => {
 
   return (
     <div className="card shadow mb-4 my-2">
-      <div className="card-header bg-info text-white d-flex justify-content-between align-items-center">
+      <div className="card-header text-white d-flex justify-content-between align-items-center" style={{ backgroundColor: '#000051' }}>
         <span>Ingreso según Educación y Presencia en el Hogar</span>
         <div className="d-flex gap-2">
-          <select
-            value={seleccion}
-            onChange={(e) => setSeleccion(e.target.value)}
-            className="form-select form-select-sm w-auto"
-          >
+          <select value={seleccion} onChange={(e) => setSeleccion(e.target.value)} className="form-select form-select-sm w-auto" >
             <option value="">Seleccione</option>
             <option value="padre">Padre</option>
             <option value="madre">Madre</option>
           </select>
 
-          <select
-            value={tipoGrafico}
-            onChange={(e) => setTipoGrafico(e.target.value)}
-            className="form-select form-select-sm w-auto"
-          >
+          <select value={tipoGrafico} onChange={(e) => setTipoGrafico(e.target.value)} className="form-select form-select-sm w-auto" >
             <option value="línea">Línea</option>
             <option value="barras">Barras</option>
             <option value="dispersión">Dispersión</option>

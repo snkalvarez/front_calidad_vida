@@ -12,7 +12,7 @@ const PrediccionModelos = ({ resultado, onComparar }) => {
 
   return (
     <div className="card">
-      <div className="card-header bg-secondary text-white">Resultado de Predicción</div>
+      <div className="card-header text-white" style={{ backgroundColor: '#000051' }}>Resultado de Predicción</div>
       <div className="card-body">
         <h5>Ingreso Predicho: <strong>${resultado.ingreso.toLocaleString()}</strong></h5>
 

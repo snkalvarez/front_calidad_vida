@@ -24,7 +24,7 @@ const GrafPresenciaPadres = () => {
     title: 'Impacto de la Presencia de Padre/Madre en el Ingreso del Hogar',
     xaxis: { title: 'Ingreso Promedio del Hogar', tickprefix: 'M$ ', tickformat: '.1f' },
     yaxis: { title: 'Situación', tickvals: data.metadata.y_ticks, ticktext: data.metadata.y_labels },
-    margin: { t: 50, l: 60, r: 40, b: 60 },
+    margin: { t: 50, l: 80, r: 40, b: 60 },
     hovermode: 'closest'
   };
 
@@ -159,14 +159,9 @@ const GrafPresenciaPadres = () => {
 
   return (
     <div className="p-4">
-      <div className="mb-3">
-        <label htmlFor="tipoGrafico" className="font-bold mr-2">Tipo de gráfico:</label>
-        <select
-          id="tipoGrafico"
-          value={tipoGrafico}
-          onChange={(e) => setTipoGrafico(e.target.value)}
-          className="border px-2 py-1 rounded"
-        >
+      <div className="mb-4">
+        <label htmlFor="tipoGrafico" className="mr-2 font-bold">Tipo de gráfico:</label>
+        <select id="tipoGrafico" value={tipoGrafico} onChange={(e) => setTipoGrafico(e.target.value)} className="border rounded px-2 py-1">
           <option value="linea">Línea</option>
           <option value="barras">Barras</option>
           <option value="dispersión">Dispersión</option>
@@ -176,12 +171,7 @@ const GrafPresenciaPadres = () => {
         </select>
       </div>
 
-      <Plot
-        data={traces}
-        layout={layout}
-        config={{ responsive: true }}
-        style={{ width: "100%", height: "500px" }}
-      />
+      <Plot data={traces} layout={layout} config={{ responsive: true }} style={{ width: "100%", height: "500px" }} />
     </div>
   );
 };

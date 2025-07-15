@@ -41,7 +41,7 @@ const GraficasPrediccionPlotly = () => {
 
     return (
         <div className="card mt-4 shadow">
-            <div className="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+            <div className="card-header text-white d-flex justify-content-between align-items-center" style={{ backgroundColor: '#000051' }}>
                 <h5 className="mb-0">Comparación: Valores Reales vs Predicción</h5>
                 <select className="form-select w-auto" value={modeloSeleccionado} onChange={handleChange}>
                     <option value="">Seleccione un modelo</option>

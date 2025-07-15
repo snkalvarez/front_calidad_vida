@@ -63,8 +63,10 @@ export default function Sidebar({ componente: Componente}) {
             <div className="wrapper">
                 <nav id="sidebar" className="small">
                     <div className="sidebar-header  align-items-center text-center">
+                        <img src="../public/Logo_Universidad-del-Cauca.png" alt="Logo" className="img-fluid" />
                         <Link to="/" className="mb-0 mx-1 sin-estilo">Predictor</Link>
                     </div>
+                    <hr />
                     <ul className="list-unstyled components">
                         <li><Link to="/">Inicio</Link></li>
                         {opcionesMenu.map((opcion, index) => (
@@ -89,7 +91,7 @@ export default function Sidebar({ componente: Componente}) {
                         {Componente && <Componente />}
                         <footer className="footer-dinamico">
                             <p className="text-muted text-center">
-                                <small>© 2025 - Todos los derechos reservados Julio Alvarez Cuaces & Juan Carlos Ruales</small>
+                                <small>© 2025 - Todos los derechos reservados Universidad del Cauca</small>
                             </p>
                         </footer>
                     </div>

@@ -3,7 +3,7 @@ const InfoMetricas = ({data}) => {
   return (
     <div className="container mt-5">
       <div className="card shadow">
-        <div className="card-body bg-primary text-white">
+        <div className="card-body text-white" style={{ backgroundColor: '#15488C' }}>
           <h3 className="card-title mb-1">Metricas</h3>
           <p className="card-text mb-0">Luego de evaluar las métricas obtenidas utilizando los parámetros por defecto para los distintos modelos, se identificó que los dos algoritmos con mejor desempeño fueron RandomForest y XGBoost. Por tal motivo, se procedió a optimizar sus hiperparámetros. Tras este proceso, el modelo XGBoost optimizado resultó ser el que obtuvo las métricas más favorables. </p>
         </div>

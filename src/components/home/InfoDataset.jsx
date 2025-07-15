@@ -38,8 +38,8 @@ const InfoDelDataset = () => {
   return (
     <div className="container mt-4">
       <div className="card shadow mb-3">
-        <div className="card-body bg-primary text-white">
-          <h3 className="card-title mb-1">Informacion de Las Variables</h3>
+        <div className="card-body  text-white" style={{ backgroundColor: '#15488C' }}>
+          <h3 className="card-title mb-1">Información de las variables</h3>
           <p className="card-text mb-0">
   Esta tabla muestra las variables seleccionadas de la Encuesta Nacional de Calidad de Vida, relacionadas con educación, salud, servicios del hogar, y características y composición del hogar, que son pertinentes para predecir el ingreso mensual del hogar.
 </p>

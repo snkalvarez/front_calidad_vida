@@ -22,7 +22,7 @@ const GrafSatisfaccionIngreso = () => {
 
   return (
     <div className="card shadow mb-4">
-      <div className="card-header bg-success text-white">
+      <div className="card-header text-white" style={{ backgroundColor: '#000051' }}>
         Ingreso y Satisfacción Laboral
       </div>
       <div className="card-body">

@@ -6,7 +6,7 @@ const ModeloSeleccionado = () => {
                 {/* Tarjeta del Modelo */}
                 <div className="col-md-6 mb-4">
                     <div className="card h-100">
-                        <div className="bg-primary text-white d-flex justify-content-center align-items-center" style={{ height: '200px' }}>
+                        <div className="text-white d-flex justify-content-center align-items-center" style={{ height: '200px', backgroundColor: '#15488C' }}>
                             <i className="bi bi-laptop" style={{ fontSize: '5rem' }}></i>
                         </div>
                         <div className="card-body overflow-auto" style={{ maxHeight: '250px' }}>
@@ -26,7 +26,7 @@ const ModeloSeleccionado = () => {
                 </div>
                 <div className="col-md-6 mb-4">
                     <div className="card h-100">
-                        <div className="bg-success text-white d-flex justify-content-center align-items-center" style={{ height: '200px' }}>
+                        <div className="text-white d-flex justify-content-center align-items-center" style={{ height: '200px', backgroundColor: '#15488C' }}>
                             <i className="bi bi-bar-chart-line-fill" style={{ fontSize: '5rem' }}></i>
                         </div>
                         <div className="card-body overflow-auto" style={{ maxHeight: '250px' }}>
