@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { Tooltip } from 'bootstrap';
 
 const datasetInfo = [
   {
@@ -6,12 +7,14 @@ const datasetInfo = [
     tipo: "Categorica Nominal",
     descripcion: "¿La madre vive en este hogar?",
     opciones: { Sí: "Si", No: "No", Fallecida: "Fallecida" },
+    ayuda: "Indica si la madre de la persona vive en el hogar actualmente.",
   },
   {
     atributo: "father_lives_household",
     tipo: "Categorica Nominal",
     descripcion: "¿El padre vive en este hogar?",
     opciones: { Sí: "Si", No: "No", Fallecido: "Fallecido" },
+    ayuda: "Indica si el padre de la persona vive en el hogar actual.",
   },
   {
     atributo: "health_insurance_affiliation",
@@ -19,36 +22,42 @@ const datasetInfo = [
     descripcion:
       "¿Está afiliado a alguna entidad de seguridad social en salud?",
     opciones: { Sí: "Si", No: "No", "No sabe / No informa": "NSNC" },
+    ayuda: "Indica si la persona está afiliada a alguna entidad de seguridad social en salud.",
   },
   {
     atributo: "gender",
     tipo: "Categorica Nominal Binaria",
     descripcion: "Sexo de la persona",
     opciones: { Masculino: "Masc", Femenino: "Fem" },
+    ayuda: "Indica el sexo de la persona encuestada.",
   },
   {
     atributo: "health_issue_last_30_days",
     tipo: "Categorica Nominal",
     descripcion: "¿Tuvo algún problema de salud en los últimos 30 días?",
     opciones: { Sí: "Si", No: "No" },
+    ayuda: "Indica si la persona ha tenido algún problema de salud en los últimos 30 días.",
   },
   {
     atributo: "has_chronic_disease",
     tipo: "Categorica Nominal",
     descripcion: "¿Tiene alguna enfermedad crónica diagnosticada?",
     opciones: { Sí: "Si", No: "No" },
+    ayuda: "Indica si la persona tiene alguna enfermedad crónica diagnosticada por un médico.",
   },
   {
     atributo: "student_health_insurance",
     tipo: "Categorica Nominal",
     descripcion: "¿Tiene seguro médico estudiantil?",
     opciones: { Sí: "Si", No: "No" },
+    ayuda: "Indica si la persona cuenta con un seguro médico estudiantil.",
   },
   {
     atributo: "eps_complementary_health_plan",
     tipo: "Categorica Nominal",
     descripcion: "¿Tiene plan complementario de salud con una EPS?",
     opciones: { Sí: "Si", No: "No" },
+    ayuda: "Indica si la persona tiene un plan complementario de salud con una EPS.",
   },
   // en opciones perminta in input numerico
   {
@@ -56,30 +65,35 @@ const datasetInfo = [
     tipo: "Numerica Continua",
     descripcion: "Ingreso mensual del hogar (en unidades de gasto)",
     opciones: { min: 0, max: 150000000 },
+    ayuda: "Indica el ingreso mensual del hogar expresado en unidades de gasto.",
   },
   {
     atributo: "current_age",
     tipo: "Numerica Continua",
     descripcion: "Edad actual de la persona (en años)",
     opciones: { min: 13, max: 77 },
+    ayuda: "Indica la edad actual de la persona encuestada en años.",
   },
   {
     atributo: "household_monthly_income",
     tipo: "Numerica Continua",
     descripcion: "Ingreso mensual del hogar (en pesos)",
     opciones: { min: 0, max: 150000000 },
+    ayuda: "Indica el ingreso mensual del hogar expresado en pesos.",
   },
   {
     atributo: "per_capita_income",
     tipo: "Numerica Continua",
     descripcion: "Ingreso per cápita del hogar (en pesos)",
     opciones: { min: 0, max: 150000000 },
+    ayuda: "Indica el ingreso per cápita del hogar expresado en pesos.",
   },
   {
     atributo: "household_size",
     tipo: "Numerica Continua",
     descripcion: "Tamaño del hogar (número de personas)",
     opciones: { min: 1, max: 18 },
+    ayuda: "Indica el número total de personas que viven en el hogar.",
   },
   {
     atributo: "other_health_services",
@@ -87,18 +101,21 @@ const datasetInfo = [
     descripcion:
       "¿Cuenta con otros servicios médicos como ambulancia o asistencia domiciliaria?",
     opciones: { Sí: "Si", No: "No" },
+    ayuda: "Indica si la persona cuenta con otros servicios médicos adicionales como ambulancia o asistencia domiciliaria.",
   },
   {
     atributo: "private_health_insurance",
     tipo: "Categorica Nominal",
     descripcion: "¿Cuenta con medicina prepagada?",
     opciones: { Sí: "Si", No: "No" },
+    ayuda: "Indica si la persona tiene un seguro de salud privado o medicina prepagada.",
   },
   {
     atributo: "hospitalization_surgery_policy",
     tipo: "Categorica Nominal",
     descripcion: "¿Tiene póliza de hospitalización o cirugía?",
     opciones: { Sí: "Si", No: "No" },
+    ayuda: "Indica si la persona cuenta con una póliza de hospitalización o cirugía.",
   },
   {
     atributo: "mother_education_level",
@@ -116,6 +133,7 @@ const datasetInfo = [
       Ninguno: "Ninguno",
       "No sabe": "NSNC",
     },
+    ayuda: "Indica el nivel educativo más alto alcanzado por la madre de la persona.",
   },
   {
     atributo: "father_education_level",
@@ -133,6 +151,7 @@ const datasetInfo = [
       Ninguno: "Ninguno",
       "No sabe": "NSNC",
     },
+    ayuda: "Indica el nivel educativo más alto alcanzado por el padre de la persona.",
   },
   {
     atributo: "general_health_status",
@@ -144,6 +163,7 @@ const datasetInfo = [
       Regular: "Regular",
       Malo: "Malo",
     },
+    ayuda: "Indica la percepción general de salud de la persona encuestada.",
   },
   {
     atributo: "vision_ability",
@@ -155,6 +175,7 @@ const datasetInfo = [
       "Sí, con alguna dificultad": "AlgoDif",
       "Sin dificultad": "SinDif",
     },
+    ayuda: "Indica la capacidad visual de la persona, si puede ver sin ayuda o con dificultad.",
   },
   {
     atributo: "hearing_ability",
@@ -166,6 +187,7 @@ const datasetInfo = [
       "Sí, con alguna dificultad": "AlgoDif",
       "Sin dificultad": "SinDif",
     },
+    ayuda: "Indica la capacidad auditiva de la persona, si puede oír sin ayuda o con dificultad.",
   },
   {
     atributo: "self_care_ability",
@@ -177,6 +199,7 @@ const datasetInfo = [
       "Sí, con alguna dificultad": "AlgoDif",
       "Sin dificultad": "SinDif",
     },
+    ayuda: "Indica la capacidad de autocuidado de la persona, si puede realizar actividades básicas de cuidado personal sin ayuda o con dificultad.",
   },
   {
     atributo: "hand_grip_ability",
@@ -188,6 +211,7 @@ const datasetInfo = [
       "Sí, con alguna dificultad": "AlgoDif",
       "Sin dificultad": "SinDif",
     },
+    ayuda: "Indica la capacidad de agarre y movimiento de objetos con las manos, si puede hacerlo sin ayuda o con dificultad.",
   },
   {
     atributo: "cognitive_ability",
@@ -199,6 +223,7 @@ const datasetInfo = [
       "Sí, con alguna dificultad": "AlgoDif",
       "Sin dificultad": "SinDif",
     },
+    ayuda: "Indica la capacidad cognitiva de la persona, si puede entender, aprender o tomar decisiones sin ayuda o con dificultad.",
   },
   {
     atributo: "speech_ability",
@@ -210,6 +235,7 @@ const datasetInfo = [
       "Sí, con alguna dificultad": "AlgoDif",
       "Sin dificultad": "SinDif",
     },
+    ayuda: "Indica la capacidad de habla de la persona, si puede comunicarse verbalmente sin ayuda o con dificultad.",
   },
   {
     atributo: "mobility_ability",
@@ -221,24 +247,28 @@ const datasetInfo = [
       "Sí, con alguna dificultad": "AlgoDif",
       "Sin dificultad": "SinDif",
     },
+    ayuda: "Indica la capacidad de movilidad de la persona, si puede moverse sin ayuda o con dificultad.",
   },
   {
     atributo: "life_satisfaction_level",
     tipo: "Numerica Discreta",
     descripcion: "Satisfacción con la vida (0 a 10)",
     opciones: Array.from({ length: 11 }, (_, i) => i.toString()),
+    ayuda: "Indica el nivel de satisfacción general con la vida de la persona.",
   },
   {
     atributo: "job_satisfaction_level",
     tipo: "Numerica Discreta",
     descripcion: "Satisfacción con el trabajo/actividad (0 a 10)",
     opciones: Array.from({ length: 11 }, (_, i) => i.toString()),
+    ayuda: "Indica el nivel de satisfacción con el trabajo o actividad actual de la persona.",
   },
   {
     atributo: "income_satisfaction_level",
     tipo: "Numerica Discreta",
     descripcion: "Satisfacción con el ingreso actual (0 a 10)",
     opciones: Array.from({ length: 11 }, (_, i) => i.toString()),
+    ayuda: "Indica el nivel de satisfacción con el ingreso actual de la persona.",
   },
   {
     atributo: "life_worthwhileness",
@@ -246,6 +276,7 @@ const datasetInfo = [
     descripcion:
       "Percepción de que las cosas en la vida valen la pena (0 a 10)",
     opciones: Array.from({ length: 11 }, (_, i) => i.toString()),
+    ayuda: "Indica la percepción de que las cosas en la vida valen la pena.",
   },
 ];
 
@@ -257,58 +288,29 @@ const PredictorVariables = ({ onSubmit }) => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-
     // Buscar el campo correspondiente en datasetInfo
     const field = datasetInfo.find((item) => item.atributo === name);
-
     let parsedValue = value;
-
     // Si el tipo del campo es numérico, convertir el valor
     if (field?.tipo.includes("Numerica")) {
       parsedValue = value === "" ? "" : Number(value);
     }
-
     setFormData((prev) => ({
       ...prev,
       [name]: parsedValue,
     }));
   };
 
-  const valor = {
-  "cognitive_ability": "SinDif",
-  "current_age": 25,
-  "eps_complementary_health_plan": "No",
-  "expenditure_unit_monthly_income": 2424166.667,
-  "father_education_level": "SecIncomp",
-  "father_lives_household": "Si",
-  "gender": "Fem",
-  "general_health_status": "MuyBuen",
-  "hand_grip_ability": "SinDif",
-  "has_chronic_disease": "No",
-  "health_insurance_affiliation": "Si",
-  "health_issue_last_30_days": "No",
-  "hearing_ability": "SinDif",
-  "hospitalization_surgery_policy": "No",
-  "household_monthly_income": 2424166.667,
-  "household_size": 4,
-  "income_satisfaction_level": 7,
-  "job_satisfaction_level": 4,
-  "life_satisfaction_level": 3,
-  "life_worthwhileness": 10,
-  "mobility_ability": "SinDif",
-  "mother_education_level": "PrimIncomp",
-  "mother_lives_household": "No",
-  "other_health_services": "No",
-  "per_capita_income": 142083.333,
-  "private_health_insurance": "No",
-  "self_care_ability": "SinDif",
-  "speech_ability": "SinDif",
-  "student_health_insurance": "No",
-  "vision_ability": "SinDif"
-};
+  useEffect(() => {
+    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+    tooltipTriggerList.forEach((tooltipTriggerEl) => {
+      new Tooltip(tooltipTriggerEl);
+    });
+  }, []);
+
 
   const handleSubmit = () => {
-    onSubmit({ ...valor }, modeloSeleccionado);  
+    onSubmit({ ...formData }, modeloSeleccionado);
   };
 
   return (
@@ -320,20 +322,36 @@ const PredictorVariables = ({ onSubmit }) => {
           <div className="mb-3" key={index}>
             <label className="form-label">{item.descripcion}</label>
             {item.opciones?.min !== undefined &&
-            item.opciones?.max !== undefined ? (
-              <input type="number" className="form-control" name={item.atributo} onChange={handleChange} min={item.opciones.min} max={item.opciones.max}
-                placeholder={`Ingrese un valor entre ${item.opciones.min} y ${item.opciones.max}`}
-              />
+              item.opciones?.max !== undefined ? (
+              <div className="d-flex align-items-center">
+                <input type="number" className="form-control" name={item.atributo} onChange={handleChange} min={item.opciones.min} max={item.opciones.max}
+                  placeholder={`Ingrese un valor entre ${item.opciones.min} y ${item.opciones.max}`} />
+                <span className="ms-2 text-primary" style={{ cursor: "pointer", fontWeight: "bold" }} data-bs-toggle="tooltip" data-bs-placement="top"
+                  title={item.ayuda} >
+                  &#x3f;
+                </span>
+              </div>
             ) : (
-              <select className="form-select" name={item.atributo} onChange={handleChange} >
-                <option value="">Seleccione una opción</option>
-                {item.opciones &&
-                  Object.entries(item.opciones).map(([label, value], i) => (
-                    <option key={i} value={value}>
-                      {label}
-                    </option>
-                  ))}
-              </select>
+              <div className="d-flex align-items-center">
+                <select className="form-select" name={item.atributo} onChange={handleChange} >
+                  <option value="">Seleccione una opción</option>
+                  {item.opciones &&
+                    Object.entries(item.opciones).map(([label, value], i) => (
+                      <option key={i} value={value}>
+                        {label}
+                      </option>
+                    ))}
+                </select>
+                <span
+                  className="ms-2 text-primary"
+                  style={{ cursor: "pointer", fontWeight: "bold" }}
+                  data-bs-toggle="tooltip"
+                  data-bs-placement="top"
+                  title={item.ayuda}
+                >
+                  &#x3f;
+                </span>
+              </div>
             )}
           </div>
         ))}
