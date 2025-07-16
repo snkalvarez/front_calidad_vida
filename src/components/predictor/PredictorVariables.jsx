@@ -316,6 +316,7 @@ const PredictorVariables = ({ onSubmit }) => {
   return (
     <div className="card" style={{ height: "650px" }}>
       <div className="card-header text-white" style={{ backgroundColor: '#000051' }}>Predictor</div>
+      <form onSubmit={handleSubmit} className="card-body overflow-auto">
       <div className="card-body overflow-auto">
         <p className="text-muted">Ingresa todos los campos para realizar la predicción sobre Ingreso Del Hogar </p>
         {datasetInfo.map((item, index) => (
@@ -325,7 +326,7 @@ const PredictorVariables = ({ onSubmit }) => {
               item.opciones?.max !== undefined ? (
               <div className="d-flex align-items-center">
                 <input type="number" className="form-control" name={item.atributo} onChange={handleChange} min={item.opciones.min} max={item.opciones.max}
-                  placeholder={`Ingrese un valor entre ${item.opciones.min} y ${item.opciones.max}`} />
+                  placeholder={`Ingrese un valor entre ${item.opciones.min} y ${item.opciones.max}`} required />
                 <span className="ms-2 text-primary" style={{ cursor: "pointer", fontWeight: "bold" }} data-bs-toggle="tooltip" data-bs-placement="top"
                   title={item.ayuda} >
                   &#x3f;
@@ -333,7 +334,7 @@ const PredictorVariables = ({ onSubmit }) => {
               </div>
             ) : (
               <div className="d-flex align-items-center">
-                <select className="form-select" name={item.atributo} onChange={handleChange} >
+                <select className="form-select" name={item.atributo} onChange={handleChange} required>
                   <option value="">Seleccione una opción</option>
                   {item.opciones &&
                     Object.entries(item.opciones).map(([label, value], i) => (
@@ -364,11 +365,12 @@ const PredictorVariables = ({ onSubmit }) => {
               </option>
             ))}
           </select>
-          <button className="btn btn-success" onClick={handleSubmit}>
+          <button className="btn btn-success" type="submit">
             Enviar
           </button>
         </div>
       </div>
+      </form>
     </div>
   );
 };
