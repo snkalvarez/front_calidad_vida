@@ -30,10 +30,10 @@ const GraficasPrediccionRecharts = () => {
         <h5 className="mb-0">Comparación: Valores Reales vs Predicción</h5>
         <select className="form-select w-auto" value={modeloSeleccionado} onChange={handleChange}>
           <option value="">Seleccione un modelo</option>
-          <option value="XGBoostX3">XGBoost</option>
-          <option value="MlpRegressorX3">MLPRegressor</option>
-          <option value="RandomForestX3">RandomForest</option>
-          <option value="GradientBoostingX3">GradientBoosting</option>
+          <option value="XGBoost">XGBoost</option>
+          <option value="MlpRegressor">MLPRegressor</option>
+          <option value="LightGBM">LightGBM</option>
+          <option value="GradientBoosting">GradientBoosting</option>
         </select>
       </div>
       <div className="card-body">
