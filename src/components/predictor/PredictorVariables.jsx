@@ -65,7 +65,7 @@ const datasetInfo = [
     tipo: "Numerica Continua",
     descripcion: "Ingreso mensual del hogar (en unidades de gasto)",
     opciones: { min: 0, max: 150000000 },
-    ayuda: "Indica el ingreso mensual del hogar expresado en unidades de gasto.",
+    ayuda: "Calcula el ingreso mensual por unidad de gasto del hogar. Se obtiene dividiendo el ingreso mensual total entre las unidades de gasto, que ajustan según el número de adultos y niños en la casa.",
   },
   {
     atributo: "current_age",
@@ -75,18 +75,11 @@ const datasetInfo = [
     ayuda: "Indica la edad actual de la persona encuestada en años.",
   },
   {
-    atributo: "household_monthly_income",
-    tipo: "Numerica Continua",
-    descripcion: "Ingreso mensual del hogar (en pesos)",
-    opciones: { min: 0, max: 150000000 },
-    ayuda: "Indica el ingreso mensual del hogar expresado en pesos.",
-  },
-  {
     atributo: "per_capita_income",
     tipo: "Numerica Continua",
     descripcion: "Ingreso per cápita del hogar (en pesos)",
     opciones: { min: 0, max: 150000000 },
-    ayuda: "Indica el ingreso per cápita del hogar expresado en pesos.",
+    ayuda: "Este valor representa el ingreso promedio mensual disponible para cada persona en el hogar. Se calcula dividiendo el ingreso total mensual del hogar entre el número de personas que lo conforman.",
   },
   {
     atributo: "household_size",
@@ -98,8 +91,7 @@ const datasetInfo = [
   {
     atributo: "other_health_services",
     tipo: "Categorica Nominal",
-    descripcion:
-      "¿Cuenta con otros servicios médicos como ambulancia o asistencia domiciliaria?",
+    descripcion: "¿Cuenta con otros servicios médicos como ambulancia o asistencia domiciliaria?",
     opciones: { Sí: "Si", No: "No" },
     ayuda: "Indica si la persona cuenta con otros servicios médicos adicionales como ambulancia o asistencia domiciliaria.",
   },
@@ -148,7 +140,7 @@ const datasetInfo = [
       "Técnica o tecnológica completa": "TecComp",
       "Uno o más años de universidad": "UnivIncomp",
       "Universitaria completa": "UnivComp",
-      Ninguno: "Ninguno",
+      "Ninguno": "Ninguno",
       "No sabe": "NSNC",
     },
     ayuda: "Indica el nivel educativo más alto alcanzado por el padre de la persona.",
@@ -159,9 +151,9 @@ const datasetInfo = [
     descripcion: "Estado general de salud",
     opciones: {
       "Muy bueno": "MuyBuen",
-      Bueno: "Bueno",
-      Regular: "Regular",
-      Malo: "Malo",
+      "Bueno": "Bueno",
+      "Regular": "Regular",
+      "Malo": "Malo",
     },
     ayuda: "Indica la percepción general de salud de la persona encuestada.",
   },
@@ -273,8 +265,7 @@ const datasetInfo = [
   {
     atributo: "life_worthwhileness",
     tipo: "Numerica Discreta",
-    descripcion:
-      "Percepción de que las cosas en la vida valen la pena (0 a 10)",
+    descripcion: "Percepción de que las cosas en la vida valen la pena (0 a 10)",
     opciones: Array.from({ length: 11 }, (_, i) => i.toString()),
     ayuda: "Indica la percepción de que las cosas en la vida valen la pena.",
   },
@@ -309,7 +300,8 @@ const PredictorVariables = ({ onSubmit }) => {
   }, []);
 
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
     onSubmit({ ...formData }, modeloSeleccionado);
   };
 
