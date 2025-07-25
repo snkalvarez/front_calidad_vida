@@ -2,22 +2,6 @@ import { Link } from "react-router-dom";
 
 export default function Sidebar({ componente: Componente}) {
     const opcionesMenu = [
-        // {
-        //     nombre: 'Pruebas',
-        //     submenu: [
-                                // prueba realizada con recharts
-                // {
-                //     nombre: 'Exactitud de modelos Recharts',
-                //     ruta: '/GraficasComparativasRecharts'
-                // },
-                
-                // prueba realizada con react-plotly
-                // {
-                //     nombre: 'Real vs Predicción Random Forest',
-                //     ruta: '/realvsprediccionrandomforest'
-                // }
-            // ]
-        // },
         {
             id: '1',
             nombre: 'Graficas Comparativas',

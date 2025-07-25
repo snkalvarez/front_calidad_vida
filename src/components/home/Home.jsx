@@ -1,10 +1,11 @@
-
 import { useEffect } from "react";
-import useFetchDataTabla from "../../hooks/tablaComparativa/useFetchDataTabla";
 import InfoDelDataset from "./InfoDataset";
 import InfoGraficasMetricas from "./InfoGraficasMetricas";
 import InfoMetricas from "./InfoMetricas";
 import ModeloSeleccionado from "./ModeloSeleccionado";
+import useFetchDataTabla from "../../hooks/datos/useFetchDataTabla";
+import Loader from "../Loader";
+
 export default function Home() {
 
     const {data, loading, error, fetchDataTabla } = useFetchDataTabla();
@@ -19,6 +20,9 @@ export default function Home() {
         fetchDataTabla();
       }
     },[])
+
+    if (loading) return <Loader />;
+    if (error) return <div>Error al cargar los datos: {error.message}</div>;
 
   return (
     <div className="container mt-5">

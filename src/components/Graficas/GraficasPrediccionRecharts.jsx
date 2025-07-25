@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import {CartesianGrid,Legend,Line,LineChart,ResponsiveContainer,Tooltip,XAxis,YAxis,} from "recharts";
-import useFetchRealPredicho from "../../hooks/resultadoRealPredic/useFetchRealPredicho";
 import Loader from "../Loader";
+import useFetchRealPredicho from "../../hooks/datos/useFetchRealPredicho";
 
 const GraficasPrediccionRecharts = () => {
   const [modeloSeleccionado, setModeloSeleccionado] = useState("");

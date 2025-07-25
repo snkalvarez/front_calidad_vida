@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { obtenerResultadosRealVsPrediccion } from "../../api/resultadosRealPredicho";
+import { obtenerResultadosRealVsPrediccion } from "../../api/datosService";
+
 
 const useFetchRealPredicho = () =>{
     const [data, setData] = useState(null);

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { obtenerDataTablaComparativa } from "../../api/tablaDataService";
+import { obtenerDataTablaComparativa } from "../../api/datosService";
 
 const useFetchDataTabla = () => {
     const [data, setData] = useState(null);
