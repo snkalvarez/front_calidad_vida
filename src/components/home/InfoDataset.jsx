@@ -1,5 +1,3 @@
-
-
 const datasetInfo = [
   { atributo: "Madre_vive_hogar", tipo: "Categorica Nominal", descripcion: "La Madre vive en este Hogar (1: Sí, 2: No)" },
   { atributo: "Padre_vive_hogar", tipo: "Categorica Nominal", descripcion: "El Padre vive en este Hogar (1: Sí, 2: No)" },

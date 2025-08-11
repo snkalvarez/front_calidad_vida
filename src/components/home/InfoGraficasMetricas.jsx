@@ -1,44 +1,6 @@
-import {
-    Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis,
-} from "recharts";
+import {Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis} from "recharts";
 
 const InfoGraficasMetricas = ({datos}) => {
-
-  // const datos = [
-  //   {
-  //     Algoritmo: "RandomForest",
-  //     MAE: 55.004,
-  //     RMSE: 139.649,
-  //     R2:0.9850,
-  //     Tiempo_Entrenamiento: 94.8083,
-  //     Prediccion: 13.2571,
-  //     Peso_Modelo_MB: 3.3627,
-  //   },
-  //   {
-  //     Algoritmo: "XGBoost",
-  //     MAE: 91.75,
-  //     RMSE: 41.283,
-  //     R2:0.99,
-  //     Tiempo_Entrenamiento: 5.8786,
-  //     Peso_Modelo_MB: 0.7404,
-  //   },
-  //   {
-  //     Algoritmo: "GradientBoosting PRUEBA",
-  //     MAE: 6.794,
-  //     RMSE: 41.72,
-  //     R2:0.9987,
-  //     Tiempo_Entrenamiento: 27.3905,
-  //     Peso_Modelo_MB: 0.3647,
-  //   },
-  //   {
-  //     Algoritmo: "MLPRegressor PRUEBA",
-  //     MAE: 60,
-  //     RMSE: 102,
-  //     R2:0.98,
-  //     Tiempo_Entrenamiento: 169.2024,
-  //     Peso_Modelo_MB: 0.3006,
-  //   },
-  // ];
 
   return (
     <div className="container mt-5">

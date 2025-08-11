@@ -14,8 +14,6 @@ const InfoMetricas = ({data}) => {
               <thead className="table-light">
                 <tr className="text-center">
                   <th>Algoritmo</th>
-                  <th>Conjunto</th>
-                  <th>Dumificado</th>
                   <th>MAE</th>
                   <th>RMSE</th>
                   <th>R2</th>
@@ -28,8 +26,6 @@ const InfoMetricas = ({data}) => {
                 {data && data.map((dato, index) => (
                   <tr key={index} className="text-center align-middle">
                     <td className="fw-bold">{dato.Algoritmo}</td>
-                    <td>{dato.Conjunto}</td>
-                    <td>{dato.Dumificado}</td>
                     <td>{dato.MAE}</td>
                     <td>{dato.RMSE}</td>
                     <td>{dato.R2}</td>
