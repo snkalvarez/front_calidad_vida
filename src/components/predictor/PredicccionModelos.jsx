@@ -1,7 +1,7 @@
 import { Bar, BarChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 
 const PrediccionModelos = ({ resultado, onComparar }) => {
-  const modelos = ["GradientBoosting", "MLPRegressor", "LightGBM", "XGBRegressor", "Comparar todos"];
+  const modelos = ["GradientBoosting", "MlpRegressor", "LightGBM", "XGBRegressor", "Comparar todos"];
 
   if (!resultado) return <div className="alert alert-info">Esperando datos para predicción...</div>;
 
