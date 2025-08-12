@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import Logo from '../../assets/Logo_Universidad-del-Cauca.png';
 
 export default function Sidebar({ componente: Componente}) {
     const opcionesMenu = [
@@ -47,7 +48,7 @@ export default function Sidebar({ componente: Componente}) {
             <div className="wrapper">
                 <nav id="sidebar" className="small">
                     <div className="sidebar-header  align-items-center text-center">
-                        <img src="../public/Logo_Universidad-del-Cauca.png" alt="Logo" className="img-fluid" />
+                        <img src={Logo} alt="Logo" className="img-fluid" />
                         <Link to="/" className="mb-0 mx-1 sin-estilo">Predictor</Link>
                     </div>
                     <hr />

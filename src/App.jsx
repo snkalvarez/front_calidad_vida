@@ -7,6 +7,7 @@ import Home from './components/home/Home'
 import Sidebar from './components/nav/Sidebar'
 import Predictor from './components/predictor/Predictor'
 import GraficasPrediccionPlotly from './components/Graficas/GraficasPrediccionPlotly'
+import Soporte from './components/Soporte'
 
 function App() {
 
@@ -18,6 +19,7 @@ function App() {
         <Route path='GrafFactoresParentales' element={<Sidebar componente={GrafFactoresParentales}/>}/>
         <Route path="predictor" element={ <Sidebar componente={Predictor} /> } />
         <Route path='GrafIngresoEdadGenero' element={ <Sidebar componente={GrafSatisfaccionIngreso}/> }  />
+        <Route path='soporte' element={ <Sidebar componente={Soporte} /> } />
         <Route path='*' element={ <Error404 />} />
       </Routes>
     </HashRouter>

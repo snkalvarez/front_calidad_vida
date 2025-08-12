@@ -10,6 +10,7 @@ const ModeloSeleccionado = () => {
                             <i className="bi bi-laptop" style={{ fontSize: '5rem' }}></i>
                         </div>
                         <div className="card-body overflow-auto" style={{ maxHeight: '250px' }}>
+                            <h4 className="card-title">Modelo Seleccionado</h4>
                             <p>
                                 <strong>XGBRegressor</strong> es un algoritmo de aprendizaje automático especializado en tareas de regresión.
                                 Basado en la combinación de múltiples modelos de árboles de decisión, el XGBRegressor mejora gradualmente su
@@ -17,6 +18,11 @@ const ModeloSeleccionado = () => {
                                 árboles previamente construidos para evaluar las características de los datos de entrada y generar una estimación
                                 continua del valor de salida. Esto lo convierte en una herramienta efectiva y precisa para abordar problemas de
                                 regresión en diversos campos, desde la predicción de precios inmobiliarios hasta el análisis de series temporales.
+                            </p>
+                            {/** Aqui una nota de por que fue seleccionado y no los otros */}
+                            <p className="text-muted">
+                                <small>Este modelo fue seleccionado por su capacidad para predecir con alta precisión, liviano y rápido a la hora de realizar una predicción, aun que por debajo de randomforest que fue descartado debido a su dificultad de uso en cuanto a su peso.
+                                </small>
                             </p>
                         </div>
                         <div className="card-footer text-end">
@@ -45,7 +51,7 @@ const ModeloSeleccionado = () => {
                                     colsample_bytree=0.8,
                                     verbosity=0,
                                     random_state=42,
-                                    n_jobs=-1     # Usa todos los núcleos
+                                    n_jobs=-1 
                                 )
                                 </code>
                                 <br/><br/>
