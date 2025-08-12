@@ -2,14 +2,15 @@ import { Bar,BarChart,CartesianGrid,Legend, ResponsiveContainer,Tooltip,XAxis, Y
 
 const ComparacionModelos = ({ modelos }) => {
   const dummyMetricas = {
-    "XGBoost": { tiempo: 1.2, r2: 0.89, mae: 15000, rmse: 18000 },
+    "XGBRegressor": { tiempo: 1.2, r2: 0.89, mae: 15000, rmse: 18000 },
     "MLPRegressor": { tiempo: 2.4, r2: 0.84, mae: 18000, rmse: 21000 },
-    "Random Forest": { tiempo: 1.8, r2: 0.87, mae: 16000, rmse: 19000 },
+    "GradientBoosting": { tiempo: 1.8, r2: 0.87, mae: 16000, rmse: 19000 },
+    "LightGBM": { tiempo: 1.8, r2: 0.87, mae: 16000, rmse: 19000 },
   };
 
   const modelosAComparar = modelos === "Comparar todos"
     ? Object.keys(dummyMetricas)
-    : [modelos, "XGBoost"];
+    : [modelos, "XGBRegressor"];
 
   const data = modelosAComparar.map(nombre => ({
     modelo: nombre,

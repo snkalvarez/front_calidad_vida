@@ -3,6 +3,7 @@ import ComparacionModelos from './CompracionModelos';
 import PrediccionModelos from "./PredicccionModelos";
 import PredictorVariables from "./PredictorVariables";
 import usePostPrediccion from '../../hooks/predictor/usePostPrediccion';
+import Loader from '../Loader';
 
 const Predictor = () => {
   
@@ -29,11 +30,14 @@ const Predictor = () => {
     setComparacion(modelo);
   };
 
+  // if(error) return <div>Se produjo un error al realizar la predicción: {error.message}</div>;
+
   return (
     <div className="container my-4">
+      {loading && <Loader />}
       <div className="row">
         <div className="col-md-6">
-          <PredictorVariables onSubmit={postPrediccion} />
+          <PredictorVariables onSubmit={postPrediccion} loading={loading} />
         </div>
         <div className="col-md-6">
           <PrediccionModelos resultado={resultado} onComparar={manejarComparacion} />

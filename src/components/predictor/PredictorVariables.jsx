@@ -271,9 +271,9 @@ const datasetInfo = [
   },
 ];
 
-const modelos = ["XGBoost", "MlpRegressor", "LightGBM", "GradientBoosting"];
+const modelos = ["XGBRegressor", "MlpRegressor", "LightGBM", "GradientBoosting"];
 
-const PredictorVariables = ({ onSubmit }) => {
+const PredictorVariables = ({ onSubmit, loading }) => {
   const [formData, setFormData] = useState({});
   const [modeloSeleccionado, setModeloSeleccionado] = useState(modelos[0]);
 
@@ -335,13 +335,7 @@ const PredictorVariables = ({ onSubmit }) => {
                       </option>
                     ))}
                 </select>
-                <span
-                  className="ms-2 text-primary"
-                  style={{ cursor: "pointer", fontWeight: "bold" }}
-                  data-bs-toggle="tooltip"
-                  data-bs-placement="top"
-                  title={item.ayuda}
-                >
+                <span className="ms-2 text-primary"style={{ cursor: "pointer", fontWeight: "bold" }} data-bs-toggle="tooltip"data-bs-placement="top" title={item.ayuda}>
                   &#x3f;
                 </span>
               </div>
@@ -357,9 +351,7 @@ const PredictorVariables = ({ onSubmit }) => {
               </option>
             ))}
           </select>
-          <button className="btn btn-success" type="submit">
-            Enviar
-          </button>
+          <button className="btn btn-success" type="submit" disabled={loading}>Enviar</button>
         </div>
       </div>
       </form>
