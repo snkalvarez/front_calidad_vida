@@ -1,86 +1,66 @@
-import { Bar,BarChart,CartesianGrid,Legend, ResponsiveContainer,Tooltip,XAxis, YAxis,} from 'recharts';
+import { Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis, } from 'recharts';
+import useFetchDataTabla from '../../hooks/datos/useFetchDataTabla';
+import { useEffect, useMemo } from 'react';
+import Loader from '../Loader';
+
+const unirDatosModelos = (dataTbl, modelos) => {
+  if (!dataTbl || !modelos) return [];
+  return dataTbl.map((item) => {
+    // buscamos en modelos por clave que coincida con el nombre del modelo
+    // normalizamos el nombre porque pueden contener mayusculas o minusculas
+    const nombre = item.Algoritmo;
+    const claveModelo = Object.keys(modelos).find(
+      key => key.toLowerCase() === nombre.toLowerCase()
+    );
+
+    return {
+      ...item, //metricas
+      ...(claveModelo ? modelos[claveModelo] : {}) // info extra
+    };
+  });
+};
 
 const ComparacionModelos = ({ modelos }) => {
-  const dummyMetricas = {
-    "XGBRegressor": { tiempo: 1.2, r2: 0.89, mae: 15000, rmse: 18000 },
-    "MLPRegressor": { tiempo: 2.4, r2: 0.84, mae: 18000, rmse: 21000 },
-    "GradientBoosting": { tiempo: 1.8, r2: 0.87, mae: 16000, rmse: 19000 },
-    "LightGBM": { tiempo: 1.8, r2: 0.87, mae: 16000, rmse: 19000 },
-  };
 
-  const modelosAComparar = modelos === "Comparar todos"
-    ? Object.keys(dummyMetricas)
-    : [modelos, "XGBRegressor"];
+  const { data: dataTbl, loading: loadingTbl, error: errorTbl, fetchDataTabla } = useFetchDataTabla();
+  const datosUnificados = useMemo(
+    () => unirDatosModelos(dataTbl, modelos),
+    [dataTbl, modelos]
+  );
 
-  const data = modelosAComparar.map(nombre => ({
-    modelo: nombre,
-    tiempo: dummyMetricas[nombre].tiempo,
-    r2: dummyMetricas[nombre].r2,
-    mae: dummyMetricas[nombre].mae,
-    rmse: dummyMetricas[nombre].rmse,
-  }));
+  useEffect(() => {
+    if (!dataTbl) fetchDataTabla();
+  }, [])
+
+  if(loadingTbl) return <Loader />;
+  if(errorTbl) return <div>Error al cargar los datos de la tabla comparativa: {errorTbl.message}</div>;
+
+  const ChartCard = ({ title, dataKey, color }) => (
+  <div style={{ width: "100%", height: 300, marginBottom: 30 }}>
+    <h3>{title}</h3>
+    <ResponsiveContainer>
+      <BarChart data={datosUnificados}>
+        <CartesianGrid strokeDasharray="3 3" />
+        <XAxis dataKey="Algoritmo" />
+        <YAxis />
+        <Tooltip />
+        <Legend />
+        <Bar dataKey={dataKey} fill={color} />
+      </BarChart>
+    </ResponsiveContainer>
+  </div>
+);
 
   return (
     <div className="mt-4">
       <h5>Comparación de Modelos</h5>
+      <div style={{ padding: "20px" }}>
+      <ChartCard title="Tiempo de Predicción (s)" dataKey="Tiempo_Prediccion"  color="#1140daff"/>
+      <ChartCard title="Error Absoluto Medio (MAE)" dataKey="MAE" color="#445ff5ff"/>
+      <ChartCard title="Error Cuadrático Medio (RMSE)" dataKey="RMSE" color="#5661c5ff"/>
+      <ChartCard title="Predicción" dataKey="prediccion" color="#0004ffff"/>
+    </div>
 
-      {/* Tiempo */}
-      <div className="mb-4">
-        <h6>Tiempo de predicción (segundos)</h6>
-        <ResponsiveContainer width="100%" height={250}>
-          <BarChart data={data}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="modelo" />
-            <YAxis />
-            <Tooltip />
-            <Legend />
-            <Bar dataKey="tiempo" fill="#8884d8" />
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
-
-      {/* R2 */}
-      <div className="mb-4">
-        <h6>R² Score</h6>
-        <ResponsiveContainer width="100%" height={250}>
-          <BarChart data={data}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="modelo" />
-            <YAxis domain={[0, 1]} />
-            <Tooltip />
-            <Legend />
-            <Bar dataKey="r2" fill="#82ca9d" />
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
-
-      <div className="mb-4">
-        <h6>MAE</h6>
-        <ResponsiveContainer width="100%" height={250}>
-          <BarChart data={data}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="modelo" />
-            <YAxis />
-            <Tooltip />
-            <Legend />
-            <Bar dataKey="mae" fill="#ffc658" />
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
-
-      <div className="mb-4">
-        <h6>RMSE</h6>
-        <ResponsiveContainer width="100%" height={250}>
-          <BarChart data={data}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="modelo" />
-            <YAxis />
-            <Tooltip />
-            <Legend />
-            <Bar dataKey="rmse" fill="#d84c6c" />
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
     </div>
   );
 };

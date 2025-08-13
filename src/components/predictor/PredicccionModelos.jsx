@@ -14,7 +14,7 @@ const PrediccionModelos = ({ resultado, onComparar }) => {
     <div className="card">
       <div className="card-header text-white" style={{ backgroundColor: '#000051' }}>Resultado de Predicción</div>
       <div className="card-body">
-        <h5>Ingreso Predicho: <strong>${resultado.ingreso.toLocaleString()}</strong></h5>
+        <h5>Ingreso Predicho: <strong>${resultado.prediccion.toLocaleString()}</strong></h5>
 
         <div style={{ height: 250 }}>
           <ResponsiveContainer width="100%" height="100%">

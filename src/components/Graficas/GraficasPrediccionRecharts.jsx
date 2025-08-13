@@ -8,7 +8,7 @@ const GraficasPrediccionRecharts = () => {
   const [graficoCargado, setGraficoCargado] = useState(false);
 
   const {data : dataRP, loading, error, fetchRealPredicho } = useFetchRealPredicho();
-  //console.log("Datos obtenidos:", dataRP);
+  
   const handleChange = (e) => {
     const { value } = e.target;
     if (value !== "") {

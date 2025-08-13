@@ -273,7 +273,7 @@ const datasetInfo = [
 
 const modelos = ["XGBRegressor", "MlpRegressor", "LightGBM", "GradientBoosting"];
 
-const PredictorVariables = ({ onSubmit, loading }) => {
+const PredictorVariables = ({ onSubmit, loading , setResultado}) => {
   const [formData, setFormData] = useState({});
   const [modeloSeleccionado, setModeloSeleccionado] = useState(modelos[0]);
 
@@ -299,6 +299,10 @@ const PredictorVariables = ({ onSubmit, loading }) => {
     });
   }, []);
 
+  const handleChangeSelectModelo = (e) => {
+    setModeloSeleccionado(e.target.value);
+    setResultado(null); // aqui hacemos que se oculte el resultado
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -344,7 +348,7 @@ const PredictorVariables = ({ onSubmit, loading }) => {
         ))}
 
         <div className="d-flex align-items-center gap-2">
-          <select className="form-select" value={modeloSeleccionado} onChange={(e) => setModeloSeleccionado(e.target.value)} >
+          <select className="form-select" value={modeloSeleccionado} onChange={handleChangeSelectModelo} >
             {modelos.map((modelo, idx) => (
               <option key={idx} value={modelo}>
                 {modelo}
