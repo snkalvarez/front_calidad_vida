@@ -1,35 +1,39 @@
 import { Link } from "react-router-dom";
+import Logo from '../../assets/Logo_Universidad-del-Cauca.png';
 
 export default function Sidebar({ componente: Componente}) {
     const opcionesMenu = [
         {
-            nombre: 'Inicio',
+            id: '1',
+            nombre: 'Graficas Comparativas',
             submenu: [
                 {
-                    nombre: 'prueba',
-                    ruta: '/prueba'
-                }
+                    nombre: 'Comparativas Real vs Predicción',
+                    ruta: '/GraficasComparativasPlotly'
+                },
             ]
         },
         {
-            nombre: 'Configuración',
+            id: '2',
+            nombre: 'Graficas Exploratorias',
             submenu: [
                 {
-                    nombre: 'Perfil',
-                    ruta: '/perfil'
+                    nombre: 'Factores Parentales y Su incidencia en los Ingresos del Hogar',
+                    ruta: '/GrafFactoresParentales'
                 },
                 {
-                    nombre: 'Seguridad',
-                    ruta: '/seguridad'
-                }
+                    nombre: 'Satisfacción, Edad y Género vs Ingreso Laboral',
+                    ruta: '/GrafIngresoEdadGenero'
+                },
             ]
         },
         {
-            nombre: 'Ayuda',
+            id: '3',
+            nombre: 'Predictor',
             submenu: [
                 {
-                    nombre: 'Documentación',
-                    ruta: '/documentacion'
+                    nombre: 'Predictor',
+                    ruta: '/predictor'
                 },
                 {
                     nombre: 'Soporte',
@@ -44,16 +48,19 @@ export default function Sidebar({ componente: Componente}) {
             <div className="wrapper">
                 <nav id="sidebar" className="small">
                     <div className="sidebar-header  align-items-center text-center">
+                        <img src={Logo} alt="Logo" className="img-fluid" />
                         <Link to="/" className="mb-0 mx-1 sin-estilo">Predictor</Link>
                     </div>
+                    <hr />
                     <ul className="list-unstyled components">
+                        <li><Link to="/">Inicio</Link></li>
                         {opcionesMenu.map((opcion, index) => (
                             <li key={index}>
-                                <a href={`#${opcion.nombre}Submenu`}data-bs-toggle="collapse" data-toggle="collapse" aria-expanded="false" className="dropdown-toggle">
+                                <a href={`#${opcion.id}Submenu`}data-bs-toggle="collapse" data-toggle="collapse" aria-expanded="false" className="dropdown-toggle">
                                     {opcion.nombre}
                                 </a>
                                 <ul
-                                    className="collapse list-unstyled" id={`${opcion.nombre}Submenu`} data-bs-parent="#sidebar ul.components" >
+                                    className="collapse list-unstyled" id={`${opcion.id}Submenu`} data-bs-parent="#sidebar ul.components" >
                                     {opcion.submenu.map((subopcion, subIndex) => (
                                         <li key={subIndex} >
                                             <Link to={subopcion.ruta}>{subopcion.nombre}</Link>
@@ -69,7 +76,7 @@ export default function Sidebar({ componente: Componente}) {
                         {Componente && <Componente />}
                         <footer className="footer-dinamico">
                             <p className="text-muted text-center">
-                                <small>© 2025 - Todos los derechos reservados Julio ALvarez Cuaces & Juan Carlos Ruales</small>
+                                <small>© 2025 - Todos los derechos reservados Universidad del Cauca</small>
                             </p>
                         </footer>
                     </div>
