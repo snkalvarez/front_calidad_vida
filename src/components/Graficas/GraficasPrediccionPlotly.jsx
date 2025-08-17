@@ -47,13 +47,18 @@ const GraficasPrediccionPlotly = () => {
                 <h5 className="mb-0">Comparación: Valores Reales vs Predicción</h5>
                 <select className="form-select w-auto" value={modeloSeleccionado} onChange={handleChange} disabled={loading}>
                     <option value="">Seleccione un modelo</option>
-                    <option value="XGBoost">XGBoost</option>
+                    <option value="XGBRegressor">XGBRegressor</option>
                     <option value="MlpRegressor">MLPRegressor</option>
                     <option value="LightGBM">LightGBM</option>
                     <option value="GradientBoosting">GradientBoosting</option>
                 </select>
             </div>
             <div className="card-body">
+                <p className="fs-5">Las gráficas de Real vs. Predicción son una representación visual que compara 
+                    los valores reales con los valores que un modelo ha predicho. 
+                    Este tipo de gráfica es un diagrama de dispersión (scatter plot), 
+                    que se usa para evaluar el rendimiento del modelo mostrando qué tan cerca están los puntos predichos de la línea de valores reales.
+                </p>
                 {
                     loading ? (
                         <Loader />

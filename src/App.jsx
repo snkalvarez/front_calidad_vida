@@ -14,13 +14,13 @@ function App() {
   return (
     <HashRouter>
       <Routes>
-        <Route path="/" element={ <Sidebar componente={Home}  /> } />
-        <Route path='GraficasComparativasPlotly' element={<Sidebar componente={GraficasPrediccionPlotly}/>} />
-        <Route path='GrafFactoresParentales' element={<Sidebar componente={GrafFactoresParentales}/>}/>
-        <Route path="predictor" element={ <Sidebar componente={Predictor} /> } />
-        <Route path='GrafIngresoEdadGenero' element={ <Sidebar componente={GrafSatisfaccionIngreso}/> }  />
-        <Route path='soporte' element={ <Sidebar componente={Soporte} /> } />
-        <Route path='*' element={ <Error404 />} />
+        <Route path="/" element={<Sidebar componente={Home} />} />
+        <Route path='GraficasComparativasPlotly' element={<Sidebar componente={GraficasPrediccionPlotly} />} />
+        <Route path='GrafFactoresParentales' element={<Sidebar componente={GrafFactoresParentales} />} />
+        <Route path='GrafIngresoEdadGenero' element={<Sidebar componente={GrafSatisfaccionIngreso} />} />
+        <Route path="predictor" element={<Sidebar componente={Predictor} />} />
+        <Route path='soporte' element={<Sidebar componente={Soporte} />} />
+        <Route path='*' element={<Error404 />} />
       </Routes>
     </HashRouter>
   )

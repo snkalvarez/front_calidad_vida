@@ -167,6 +167,28 @@ const GrafSatisfaccionEdadGrupo = () => {
       </div>
 
       <Plot data={traces} layout={layout} style={{ width: "100%", height: "500px" }} />
+
+      <hr className="my-2" />
+      <footer className="bg-light py-4">
+        <div className="row justify-content-center">
+          <div className="col-md-8 text-center">
+            <article>
+              <p className="lead fw-semibold">
+                Gráfico sobre ingreso y satisfacción laboral por grupos de edades.
+              </p>
+              <p>
+                <strong>Eje Y:</strong> Ingreso promedio del hogar en millones según la categoría del eje Y.
+              </p>
+              <p>
+                <strong>Eje X:</strong> Tenemos el nivel de satisfacción laboral, donde 0 representa "Nada satisfecho" y 10 representa "Totalmente satisfecho".
+              </p>
+              <p>
+                <strong>Grupo de Edad:</strong> Se agrupan en rangos de edad para analizar la satisfacción laboral y se diferencia según su color en el gráfico.
+              </p>
+            </article>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };

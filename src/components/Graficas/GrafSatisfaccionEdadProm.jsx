@@ -172,12 +172,7 @@ const GrafSatisfaccionEdadProm = () => {
     <div className="p-4">
       <div className="mb-4">
         <label htmlFor="tipoGrafico" className="mr-2 font-bold">Tipo de gráfico:</label>
-        <select
-          id="tipoGrafico"
-          value={tipoGrafico}
-          onChange={(e) => setTipoGrafico(e.target.value)}
-          className="border rounded px-2 py-1"
-        >
+        <select id="tipoGrafico" value={tipoGrafico} onChange={(e) => setTipoGrafico(e.target.value)} className="border rounded px-2 py-1">
           <option value="linea">Línea (doble eje)</option>
           <option value="barras">Barras agrupadas</option>
           <option value="area">Área</option>
@@ -188,11 +183,31 @@ const GrafSatisfaccionEdadProm = () => {
         </select>
       </div>
 
-      <Plot
-        data={traces}
-        layout={layout}
-        style={{ width: "100%", height: "500px" }}
-      />
+      <Plot data={traces} layout={layout} style={{ width: "100%", height: "500px" }} />
+      <hr className="my-2" />
+      <footer className="bg-light py-4">
+        <div className="row justify-content-center">
+          <div className="col-md-8 text-center">
+            <article>
+              <p className="lead fw-semibold">
+                Gráfico sobre ingreso, satisfacción laboral y edad.
+              </p>
+              <p>
+                <strong>Eje Y a la izquierda:</strong> Ingreso promedio del hogar en millones según la categoría del eje Y.
+              </p>
+              <p>
+                <strong>Eje X:</strong> Tenemos el nivel de satisfacción laboral, donde 0 representa "Nada satisfecho" y 10 representa "Totalmente satisfecho".
+              </p>
+              <p>
+                <strong>Eje Y a la Derecha:</strong> Edad promedio del hogar en años según la categoría del eje Y.
+              </p>
+              <p className="text-muted">
+                Tener el cuenta los colores para identificar entre Ingreso mensual y Edad promedio.
+              </p>
+            </article>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };

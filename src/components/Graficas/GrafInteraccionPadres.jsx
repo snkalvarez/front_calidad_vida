@@ -46,6 +46,35 @@ const GrafInteraccionPadres = () => {
           />
         )}
       </div>
+      <hr className="my-2" />
+    <footer className="bg-light py-4">
+      <div className="row justify-content-center">
+        <div className="col-md-8 text-center">
+          <article>
+            <p className="lead fw-semibold">
+              Gráfico sobre la presencia y educación de padres/madres en el hogar y su relación con el ingreso familiar.
+            </p>
+            <p>
+              <strong>Eje Y:</strong> Ingreso promedio del hogar en millones según la categoría del eje X.
+            </p>
+            <p>
+              <strong>Eje X:</strong> Opciones de educación: "No Sabe", "Ninguno", 
+              "All Uni" (Termino toda la Universidad), 
+              "Alg Uni" (hizo algo de universidad), 
+              "All Tec/Tecno" (Termino el Técnico/Tecnológico), 
+              "Alg Tec/Tecno" (hizo algo de Técnico/Tecnológico), 
+              "All Secun" (Termino toda la Secundaria), 
+              "Alg Secun" (hizo algo de Secundaria), 
+              "All Prim" (Termino toda la Primaria), 
+              "Alg Prim" (hizo algo de Primaria).
+            </p>
+            <p>
+              <strong>Estado:</strong> se diferencia según el color de la linea, donde cada color representa una categoría de vive en el hogar: "Vive en el hogar", "No vive en el hogar" o "Falleció".
+            </p>
+          </article>
+        </div>
+      </div>
+    </footer>
     </div>
   );
 };
