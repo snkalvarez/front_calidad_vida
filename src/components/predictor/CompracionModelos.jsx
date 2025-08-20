@@ -5,7 +5,9 @@ import Loader from '../Loader';
 
 const unirDatosModelos = (dataTbl, modelos) => {
   if (!dataTbl || !modelos) return [];
-  return dataTbl.map((item) => {
+  return dataTbl
+  .filter(item => item.Algoritmo != "RandomForest")// ignoramoes RandomForest ya que no lo necesitamos y no obtendremos valor de predicción para este.
+  .map((item) => {
     // buscamos en modelos por clave que coincida con el nombre del modelo
     // normalizamos el nombre porque pueden contener mayusculas o minusculas
     const nombre = item.Algoritmo;
@@ -23,6 +25,7 @@ const unirDatosModelos = (dataTbl, modelos) => {
 const ComparacionModelos = ({ modelos }) => {
 
   const { data: dataTbl, loading: loadingTbl, error: errorTbl, fetchDataTabla } = useFetchDataTabla();
+  
   const datosUnificados = useMemo(
     () => unirDatosModelos(dataTbl, modelos),
     [dataTbl, modelos]
