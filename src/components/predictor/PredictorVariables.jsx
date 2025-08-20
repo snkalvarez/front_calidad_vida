@@ -65,7 +65,7 @@ const datasetInfo = [
     tipo: "Numerica Continua",
     descripcion: "Ingreso mensual del hogar (en unidades de gasto)",
     opciones: { min: 0, max: 150000000 },
-    ayuda: "Calcula el ingreso mensual por unidad de gasto del hogar. Se obtiene dividiendo el ingreso mensual total entre las unidades de gasto, que ajustan según el número de adultos y niños en la casa.",
+    ayuda: "Suma todos los ingresos del hogar en el mes (sueldos, pensiones, ayudas, rentas, etc.). Cuenta cuántas unidades de gasto hay en el hogar: Si todos comparten los mismos gastos → hay 1 sola unidad de gasto. Si dentro del hogar hay personas que se sostienen aparte (ej. un hermano que paga su comida) → forman otra unidad de gasto. Divide el ingreso mensual total del hogar entre el número de unidades de gasto", 
   },
   {
     atributo: "current_age",
