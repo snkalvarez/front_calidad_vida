@@ -30,21 +30,13 @@ const GrafEducacionPadres = () => {
         <div className="col-md-8 text-center">
           <article>
             <p className="lead fw-semibold">
-              Gráfico sobre la educación de padres/madres en el hogar y su relación con el ingreso familiar.
+              Gráfico sobre la educación de padres/madres en el hogar y su relación con el ingreso.
             </p>
             <p>
-              <strong>Eje Y:</strong> Opciones de educación: "No Sabe", "Ninguno", 
-              "All Uni" (Termino toda la Universidad), 
-              "Alg Uni" (hizo algo de universidad), 
-              "All Tec/Tecno" (Termino el Técnico/Tecnológico), 
-              "Alg Tec/Tecno" (hizo algo de Técnico/Tecnológico), 
-              "All Secun" (Termino toda la Secundaria), 
-              "Alg Secun" (hizo algo de Secundaria), 
-              "All Prim" (Termino toda la Primaria), 
-              "Alg Prim" (hizo algo de Primaria).
-            </p>
-            <p>
-              <strong>Eje X:</strong> Ingreso promedio del hogar en millones según la categoría del eje Y.
+              Se ve una relación clara entre la educación de los padres/madres y mayor ingreso.
+              Los hogares con mayores ingresos tienden a tener padres/madres con educación superior.
+              A medida que aumenta el nivel educativo (primaria - secundaria - técnica - universitaria) también se observa un aumento en el ingreso.
+              Esto sugiere que la educación de los padres/madres puede influir positivamente en el bienestar económico del hogar.
             </p>
           </article>
         </div>
