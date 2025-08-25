@@ -8,7 +8,7 @@ import { getPresenciaLayout } from './layout/getPresenciaLayout';
 
 const GrafPresenciaPadres = () => {
   const [tipoGrafico, setTipoGrafico] = useState('linea');
-  const { data, loading, error, fetchPresenciaPadres } = useFetchPresePadres();
+  const { data , loading, error, fetchPresenciaPadres } = useFetchPresePadres();
 
   useEffect(() => {
     fetchPresenciaPadres();
@@ -18,8 +18,9 @@ const GrafPresenciaPadres = () => {
   if (error) return <div>Error: {error}</div>;
 
   const traces = getPresenciaTraces(tipoGrafico, data);
-  const layout = getPresenciaLayout(tipoGrafico, data.metadata);
-
+  const layout = getPresenciaLayout(data.meta);
+  
+  
   return (
   <div className="container py-4">
     <section className="mb-4">
@@ -27,21 +28,17 @@ const GrafPresenciaPadres = () => {
     </section>
 
     <section className="mb-5">
-      <Plot data={traces} layout={layout} config={{ responsive: true }} style={{ width: "100%", height: "500px" }} />
+       <Plot data={traces} layout={layout} config={{ responsive: true }} style={{ width: "100%", height: "600px" }} />
     </section>
     <hr className="my-2" />
     <footer className="bg-light py-4">
       <div className="row justify-content-center">
         <div className="col-md-8 text-center">
           <article>
-            <p className="lead fw-semibold">
-              Gráfico sobre la presencia de padres/madres en el hogar y su relación con el ingreso familiar.
-            </p>
-            <p>
-              <strong>Eje Y:</strong> Opciones de presencia: "Vive en el hogar", "No vive en el hogar" o "Falleció".
-            </p>
-            <p>
-              <strong>Eje X:</strong> Ingreso promedio del hogar en millones según la categoría del eje Y.
+            <p className="lead ">
+              Cuando el padre o la madre viven en el hogar los hogares presentan ingresos promedio de 1.7M.  
+              Cuando alguno de los dos no vive en el hogar, el ingreso promedio baja significativamente aproximadamente a 1.3M siendo la condición más desfavorable.
+              Los efectos son similares para hogares donde se cumplen las condiciones de los dos padres vive en el hogar.
             </p>
           </article>
         </div>
