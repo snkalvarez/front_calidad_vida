@@ -189,20 +189,10 @@ const GrafSatisfaccionEdadProm = () => {
         <div className="row justify-content-center">
           <div className="col-md-8 text-center">
             <article>
-              <p className="lead fw-semibold">
-                Gráfico sobre ingreso, satisfacción laboral y edad.
-              </p>
               <p>
-                <strong>Eje Y a la izquierda:</strong> Ingreso promedio del hogar en millones según la categoría del eje Y.
-              </p>
-              <p>
-                <strong>Eje X:</strong> Tenemos el nivel de satisfacción laboral, donde 0 representa "Nada satisfecho" y 10 representa "Totalmente satisfecho".
-              </p>
-              <p>
-                <strong>Eje Y a la Derecha:</strong> Edad promedio del hogar en años según la categoría del eje Y.
-              </p>
-              <p className="text-muted">
-                Tener el cuenta los colores para identificar entre Ingreso mensual y Edad promedio.
+                En la gráfica podemos observar cómo a mayor edad, mayor ingreso mensual del hogar, y mayor satisfacción con el trabajo.
+                Cuando la edad promedio es menor, el ingreso promedio mensual también tiende a ser más bajo.
+                A menor satisfacción con el trabajo, menor es el ingreso mensual y la edad promedio.
               </p>
             </article>
           </div>

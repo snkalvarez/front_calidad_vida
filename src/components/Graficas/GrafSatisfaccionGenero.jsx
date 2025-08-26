@@ -157,17 +157,8 @@ const GrafSatisfaccionGenero = () => {
         <div className="row justify-content-center">
           <div className="col-md-8 text-center">
             <article>
-              <p className="lead fw-semibold">
-                Gráfico sobre ingreso según el género y el nivel de satisfacción laboral.
-              </p>
               <p>
-                <strong>Eje Y a la izquierda:</strong> Ingreso promedio del hogar en millones según la categoría del eje Y.
-              </p>
-              <p>
-                <strong>Eje X:</strong> Tenemos el nivel de satisfacción laboral, donde 0 representa "Nada satisfecho" y 10 representa "Totalmente satisfecho".
-              </p>
-              <p className="text-muted">
-                Tener el cuenta los colores para identificar entre el genero masculino y femenino.
+                La gráfica es muy clara y muestra que independientemente del género, sea hombre o mujer, a mayor satisfacción laboral, mayor es el ingreso mensual. Sin embargo, se observa que los hombres tienden a tener ingresos más altos que las mujeres en todos los niveles de satisfacción laboral. Esto sugiere que, aunque la satisfacción laboral influye positivamente en el ingreso para ambos géneros, persiste una brecha salarial entre hombres y mujeres.
               </p>
             </article>
           </div>

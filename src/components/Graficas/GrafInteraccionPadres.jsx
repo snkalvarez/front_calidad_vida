@@ -33,8 +33,7 @@ const GrafInteraccionPadres = () => {
         )}
 
         {!loading && trazas && tipoGrafico === "pie" && (
-          <Plot
-            data={[{
+          <Plot data={[{
               type: "pie",
               labels: trazas.labels,
               values: trazas.values,
@@ -54,23 +53,18 @@ const GrafInteraccionPadres = () => {
             <p className="lead fw-semibold">
               Gráfico sobre la presencia y educación de padres/madres en el hogar y su relación con el ingreso familiar.
             </p>
-            <p>
-              <strong>Eje Y:</strong> Ingreso promedio del hogar en millones según la categoría del eje X.
-            </p>
-            <p>
-              <strong>Eje X:</strong> Opciones de educación: "No Sabe", "Ninguno", 
-              "All Uni" (Termino toda la Universidad), 
-              "Alg Uni" (hizo algo de universidad), 
-              "All Tec/Tecno" (Termino el Técnico/Tecnológico), 
-              "Alg Tec/Tecno" (hizo algo de Técnico/Tecnológico), 
-              "All Secun" (Termino toda la Secundaria), 
-              "Alg Secun" (hizo algo de Secundaria), 
-              "All Prim" (Termino toda la Primaria), 
-              "Alg Prim" (hizo algo de Primaria).
-            </p>
-            <p>
-              <strong>Estado:</strong> se diferencia según el color de la linea, donde cada color representa una categoría de vive en el hogar: "Vive en el hogar", "No vive en el hogar" o "Falleció".
-            </p>
+            { seleccion == "padre" && (
+              <p>
+                Este grafico podemos ver como el ingreso del hogar varía según la educación y presencia del padre, donde la educación del padre influye directamente en el ingreso familiar.
+                Notamos que de presencia del padre solo contamos con un dato de primaria incompleta, lo que limita nuestra capacidad para analizar su impacto en el ingreso.
+              </p>
+            )}
+            { seleccion == "madre" && (
+              <p>
+                Este gráfico muestra como la educación y la presencia de la madre influye en el ingreso del hogar, donde a mayor educación de la madre, mayor es el ingreso del hogar.
+                Notamos que de presencia de la madre solo contamos con un dato de primaria incompleta, lo que limita nuestra capacidad para analizar su impacto en el ingreso.
+              </p>
+            )}
           </article>
         </div>
       </div>

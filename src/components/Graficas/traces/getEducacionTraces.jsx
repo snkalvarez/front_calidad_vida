@@ -1,131 +1,37 @@
 export function getEducacionTraces(tipo, data) {
-  const { education_labels, father_education, mother_education } = data;
+ const { categories, father, mother, labels } = data;
 
   switch (tipo) {
     case "linea":
       return [
-        {
-          x: father_education.income,
-          y: education_labels,
-          type: "scatter",
-          mode: "lines+markers",
-          name: "Educación Padre",
-          line: { color: "blue", width: 2 },
-          marker: { symbol: "circle", size: 8 },
-        },
-        {
-          x: mother_education.income,
-          y: education_labels,
-          type: "scatter",
-          mode: "lines+markers",
-          name: "Educación Madre",
-          line: { color: "red", width: 2 },
-          marker: { symbol: "square", size: 8 },
-        },
+        { x: categories, y: father, type: "scatter", mode: "lines+markers", name: "Padre", line: { color: "blue" } },
+        { x: categories, y: mother, type: "scatter", mode: "lines+markers", name: "Madre", line: { color: "red" } }
       ];
-
     case "barras":
       return [
-        {
-          x: father_education.income,
-          y: education_labels,
-          type: "bar",
-          orientation: "h",
-          name: "Educación Padre",
-          marker: { color: "blue" },
-        },
-        {
-          x: mother_education.income,
-          y: education_labels,
-          type: "bar",
-          orientation: "h",
-          name: "Educación Madre",
-          marker: { color: "red" },
-        },
+        { x: categories, y: father, type: "bar", name: "Padre", marker: { color: "blue" } },
+        { x: categories, y: mother, type: "bar", name: "Madre", marker: { color: "red" } }
       ];
-
     case "dispersión":
       return [
-        {
-          x: father_education.income,
-          y: education_labels,
-          type: "scatter",
-          mode: "markers",
-          name: "Educación Padre",
-          marker: { color: "blue", size: 10 },
-        },
-        {
-          x: mother_education.income,
-          y: education_labels,
-          type: "scatter",
-          mode: "markers",
-          name: "Educación Madre",
-          marker: { color: "red", size: 10 },
-        },
+        { x: categories, y: father, mode: "markers", type: "scatter", name: "Padre", marker: { color: "blue" } },
+        { x: categories, y: mother, mode: "markers", type: "scatter", name: "Madre", marker: { color: "red" } }
       ];
-
     case "area":
       return [
-        {
-          x: father_education.income,
-          y: education_labels,
-          type: "scatter",
-          mode: "lines",
-          fill: "tozerox",
-          name: "Educación Padre",
-          line: { color: "blue" },
-        },
-        {
-          x: mother_education.income,
-          y: education_labels,
-          type: "scatter",
-          mode: "lines",
-          fill: "tozerox",
-          name: "Educación Madre",
-          line: { color: "red" },
-        },
+        { x: categories, y: father, type: "scatter", mode: "lines", fill: "tozeroy", name: "Padre", line: { color: "blue" } },
+        { x: categories, y: mother, type: "scatter", mode: "lines", fill: "tozeroy", name: "Madre", line: { color: "red" } }
       ];
-
     case "boxplot":
       return [
-        {
-          y: father_education.income,
-          name: "Padre",
-          type: "box",
-          marker: { color: "blue" },
-        },
-        {
-          y: mother_education.income,
-          name: "Madre",
-          type: "box",
-          marker: { color: "red" },
-        },
+        { y: father, type: "box", name: "Padre", marker: { color: "blue" } },
+        { y: mother, type: "box", name: "Madre", marker: { color: "red" } }
       ];
-
-    case "heatmap":
-      return [
-        {
-          z: [father_education.income, mother_education.income],
-          x: education_labels,
-          y: ["Padre", "Madre"],
-          type: "heatmap",
-          colorscale: "Viridis",
-        },
-      ];
-
     case "pie":
       return [
-        {
-          type: "pie",
-          labels: ["Padre", "Madre"],
-          values: [
-            father_education.income.reduce((a, b) => a + b, 0),
-            mother_education.income.reduce((a, b) => a + b, 0),
-          ],
-          marker: { colors: ["blue", "red"] },
-        },
+        { labels: categories, values: father, type: "pie", name: "Padre", hole: 0.4 },
+        { labels: categories, values: mother, type: "pie", name: "Madre", hole: 0.4, domain: { column: 1 } }
       ];
-
     default:
       return [];
   }

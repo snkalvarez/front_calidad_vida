@@ -173,17 +173,10 @@ const GrafSatisfaccionEdadGrupo = () => {
         <div className="row justify-content-center">
           <div className="col-md-8 text-center">
             <article>
-              <p className="lead fw-semibold">
-                Gráfico sobre ingreso y satisfacción laboral por grupos de edades.
-              </p>
               <p>
-                <strong>Eje Y:</strong> Ingreso promedio del hogar en millones según la categoría del eje Y.
-              </p>
-              <p>
-                <strong>Eje X:</strong> Tenemos el nivel de satisfacción laboral, donde 0 representa "Nada satisfecho" y 10 representa "Totalmente satisfecho".
-              </p>
-              <p>
-                <strong>Grupo de Edad:</strong> Se agrupan en rangos de edad para analizar la satisfacción laboral y se diferencia según su color en el gráfico.
+                En la grafica notamos como a mayor edad promedio, mayor es el ingreso mensual del hogar, esto es notable también con el nivel de satisfacción, ya que a mayor satisfacción, mayor es el ingreso y la edad promedio.
+                se puede observar un pico de crecimiento en el grupo de edades entre 35-50 años.
+                A edades menores, el ingreso es considerablemente menor, a mayor edad se sumaria la experiencia laboral adquirida.
               </p>
             </article>
           </div>
