@@ -6,72 +6,62 @@ const ModeloSeleccionado = () => {
                 {/* Tarjeta del Modelo */}
                 <div className="col-md-6 mb-4">
                     <div className="card h-100">
-                        <div className="text-white d-flex justify-content-center align-items-center" style={{ height: '200px', backgroundColor: '#15488C' }}>
+                        <div className="text-white d-flex justify-content-center align-items-center" style={{ height: '200px', backgroundColor: '#8B488C' }}>
                             <i className="bi bi-laptop" style={{ fontSize: '5rem' }}></i>
                         </div>
                         <div className="card-body overflow-auto" style={{ maxHeight: '250px' }}>
                             <h4 className="card-title">Modelo Seleccionado</h4>
                             <p>
-                                <strong>XGBRegressor</strong> es un algoritmo de aprendizaje automático especializado en tareas de regresión.
-                                Basado en la combinación de múltiples modelos de árboles de decisión, el XGBRegressor mejora gradualmente su
-                                capacidad predictiva al corregir errores en cada iteración. Para realizar una predicción, el modelo utiliza los
-                                árboles previamente construidos para evaluar las características de los datos de entrada y generar una estimación
-                                continua del valor de salida. Esto lo convierte en una herramienta efectiva y precisa para abordar problemas de
-                                regresión en diversos campos, desde la predicción de precios inmobiliarios hasta el análisis de series temporales.
+                                <strong>GradientBoostingRegressor</strong> es un algoritmo de aprendizaje automático para tareas de regresión. Se basa en el principio de "potenciación" (boosting), donde se construyen secuencialmente múltiples árboles de decisión débiles. Cada nuevo árbol se entrena para corregir los errores de los árboles anteriores. A diferencia de otros métodos de boosting, Gradient Boosting se enfoca en minimizar una función de pérdida (error) al dirigir la construcción de cada árbol hacia la dirección del gradiente negativo de esa función. Esto le permite obtener predicciones precisas y robustas, siendo muy efectivo en problemas de regresión complejos.
                             </p>
                             {/** Aqui una nota de por que fue seleccionado y no los otros */}
                             <p className="text-muted">
-                                <small>Este modelo fue seleccionado por su capacidad para predecir con alta precisión, liviano y rápido a la hora de realizar una predicción, aun que por debajo de randomforest que fue descartado debido a su dificultad de uso en cuanto a su peso.
+                                <small>
+                                    Este modelo fue seleccionado aun que segundo mejor modelo por debajo de RandomForest que es descartado por su tamaño y recursos, pero GradientBoostingRegressor ofrece un equilibrio entre precisión y eficiencia, siendo más ligero en términos de tamaño del modelo y consumo de recursos computacionales sumado a la generación de predicciones con un error absoluto bajo.
                                 </small>
                             </p>
                         </div>
                         <div className="card-footer text-end">
-                            <a href="https://xgboost.readthedocs.io/en/stable/python/python_api.html#xgboost.XGBRegressor" className="btn btn-link" target="_blank" rel="noopener noreferrer">Ver Documentación</a>
+                            <a href="https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.GradientBoostingRegressor.html" className="btn btn-link" target="_blank" rel="noopener noreferrer">Ver Documentación</a>
                         </div>
                     </div>
                 </div>
                 <div className="col-md-6 mb-4">
                     <div className="card h-100">
-                        <div className="text-white d-flex justify-content-center align-items-center" style={{ height: '200px', backgroundColor: '#15488C' }}>
+                        <div className="text-white d-flex justify-content-center align-items-center" style={{ height: '200px', backgroundColor: '#8B488C' }}>
                             <i className="bi bi-bar-chart-line-fill" style={{ fontSize: '5rem' }}></i>
                         </div>
                         <div className="card-body overflow-auto" style={{ maxHeight: '250px' }}>
                             <h5 className="card-title">Configuración de los parámetros</h5>
-                            <p><em>Estos parámetros fueron optimizados mediante una búsqueda de hiperparámetros para mejorar el rendimiento del modelo.</em></p>
+                            <p><em>Estos parámetros pueden ser ajustados para mejorar el rendimiento del modelo a través de una búsqueda de hiperparámetros.</em></p>
                             <p className="card-text">
                                 <code>
-                                    xgb_model = XGBRegressor(
-                                    subsample=0.8,
-                                    reg_lambda=2.0,
-                                    reg_alpha=0,
-                                    n_estimators=300,
-                                    max_depth=5,
-                                    learning_rate=0.1,
-                                    gamma=0.2,
-                                    colsample_bytree=0.8,
-                                    verbosity=0,
-                                    random_state=42,
-                                    n_jobs=-1 
-                                )
+                                    gbm_model = GradientBoostingRegressor(<br />
+                                    &nbsp;&nbsp;&nbsp;&nbsp;subsample=0.8,<br />
+                                    &nbsp;&nbsp;&nbsp;&nbsp;n_estimators=100,<br />
+                                    &nbsp;&nbsp;&nbsp;&nbsp;min_samples_split=10,<br />
+                                    &nbsp;&nbsp;&nbsp;&nbsp;min_samples_leaf=2,<br />
+                                    &nbsp;&nbsp;&nbsp;&nbsp;max_features=None,<br />
+                                    &nbsp;&nbsp;&nbsp;&nbsp;max_depth=5,<br />
+                                    &nbsp;&nbsp;&nbsp;&nbsp;learning_rate=0.2,<br />
+                                    &nbsp;&nbsp;&nbsp;&nbsp;random_state=42<br />
+                                    )
                                 </code>
-                                <br/><br/>
+                                <br /><br />
                             </p>
                             <ul>
-                                <li><strong>subsample:</strong> Porcentaje de muestras utilizadas para entrenar cada árbol.</li>
-                                <li><strong>reg_lambda:</strong> Término de regularización L2 para evitar el sobreajuste.</li>
-                                <li><strong>reg_alpha:</strong> Término de regularización L1 para mejorar la generalización.</li>
-                                <li><strong>n_estimators:</strong> Número total de árboles a construir.</li>
-                                <li><strong>max_depth:</strong> Profundidad máxima de cada árbol.</li>
-                                <li><strong>learning_rate:</strong> Tasa de aprendizaje que controla la contribución de cada árbol.</li>
-                                <li><strong>gamma:</strong> Reducción mínima en la pérdida requerida para hacer una partición adicional.</li>
-                                <li><strong>colsample_bytree:</strong> Proporción de características utilizadas en cada árbol.</li>
-                                <li><strong>verbosity:</strong> Nivel de verbosidad del algoritmo (0 = silencioso).</li>
-                                <li><strong>random_state:</strong> Semilla para reproducibilidad.</li>
-                                <li><strong>n_jobs:</strong> Número de núcleos a utilizar para el entrenamiento (usando todos los núcleos).</li>
+                                <li><strong>n_estimators:</strong> El número de árboles de decisión a construir en el modelo.</li>
+                                <li><strong>max_depth:</strong> La profundidad máxima de los árboles individuales.</li>
+                                <li><strong>learning_rate:</strong> Reduce la contribución de cada árbol, lo que ayuda a prevenir el sobreajuste.</li>
+                                <li><strong>subsample:</strong> La fracción de muestras a utilizar para el ajuste de cada árbol individual.</li>
+                                <li><strong>min_samples_split:</strong> El número mínimo de muestras requeridas para dividir un nodo interno.</li>
+                                <li><strong>min_samples_leaf:</strong> El número mínimo de muestras requeridas para estar en un nodo hoja.</li>
+                                <li><strong>max_features:</strong> El número de características a considerar al buscar la mejor división.</li>
+                                <li><strong>random_state:</strong> La semilla para la reproducibilidad de los resultados.</li>
                             </ul>
                         </div>
                         <div className="card-footer text-end">
-                            <a href="https://xgboost.readthedocs.io/en/stable/parameter.html" target="_blank" rel="noopener noreferrer" className="btn btn-link">Ver Documentación</a>
+                            <a href="https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.GradientBoostingRegressor.html" target="_blank" rel="noopener noreferrer" className="btn btn-link">Ver Documentación</a>
                         </div>
                     </div>
                 </div>
